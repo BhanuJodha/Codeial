@@ -2,14 +2,23 @@ const express = require("express");
 const port = 8000;
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
+const cookieParser = require("cookie-parser");
+
+// adding database
+const db = require("./config/mongoose");
+
+
+
+// setting statics
+app.use(express.static("./assets"));
+
+// setting cookie parser
+app.use(cookieParser());
 
 // setting layouts
 app.use(expressLayouts);
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
-
-// setting statics
-app.use(express.static("./assets"));
 
 // setting view engine
 app.set("view engine", "ejs");

@@ -1,6 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
+/* Body Section */
 
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
