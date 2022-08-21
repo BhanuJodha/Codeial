@@ -45,12 +45,12 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: 300000
+        maxAge: 600000
     },
     store: new MongoStore(
         {
             mongooseConnection: db,
-            autoRemove: "disable"
+            autoRemove: "enable"
         },
         function (err) {
             console.log(err);

@@ -29,7 +29,11 @@ body {
         transition: all .2s ease-in-out; }
         body #header > header div:last-child button:hover {
           background-color: white;
-          color: black; }
+          color: black;
+          border-color: transparent; }
+        body #header > header div:last-child button[data-name="sign-out"]:hover {
+          background-color: #dc3545;
+          color: white; }
   body #body {
     flex-grow: 1;
     background-color: #f8f9fa; }

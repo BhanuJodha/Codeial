@@ -4,10 +4,7 @@ const passport = require("passport");
 
 const controller = require("../controllers/users_controller");
 
-// for form data
-router.use(express.urlencoded({
-    extended: false
-}))
+router.get("/home", passport.userAuthenticated, require("../controllers/home_controller").home);
 
 router.get("/profile", passport.userAuthenticated, controller.userProfile);
 

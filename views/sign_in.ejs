@@ -1,19 +1,14 @@
-<div class="card text-center mx-auto w-50">
-    <h5 class="card-header">Welcome to codial</h5>
-    <div class="card-body w-75 m-auto">
-        <h5 class="card-title">Codial Sign In</h5>
-        <form action="./create-session" method="post">
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Email</span>
-                <input type="email" class="form-control" placeholder="Username" aria-label="Username" name="email"
-                    aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Password</span>
-                <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password"
-                    aria-describedby="basic-addon1">
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-        </form>
-    </div>
+<div>
+    <h5>Codial Sign In</h5>
+    <form action="./create-session" method="post">
+        <div>
+            <span>Email</span>
+            <input type="email" placeholder="Username" name="email">
+        </div>
+        <div>
+            <span>Password</span>
+            <input type="password" placeholder="Password" name="password">
+        </div>
+        <button type="submit">Log In</button>
+    </form>
 </div>

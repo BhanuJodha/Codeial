@@ -1,4 +1,15 @@
 <link rel="stylesheet" href="/css/home.css">
-<h2>
-    This is <%=title%>.
-</h2>
+<div id="home">
+    <form action="/post/create-post" method="post">
+        <textarea name="content" cols="30" rows="5" placeholder="Enter your post here"></textarea>
+        <input type="submit" value="Post">
+    </form>
+    <section>
+        <% if (locals.posts){ for (let i of posts){%>
+            <div>
+                <p><%=i.content%></p>
+                <p><%=i.user.name%></p>
+            </div>
+        <%}}%>
+    </section>
+</div>

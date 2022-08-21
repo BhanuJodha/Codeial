@@ -1,6 +1,7 @@
 $primary-color: rgb(33,37,41);
 $font-color-dark: rgba(255, 255, 255, 0.55);
 $secondary-color: #f8f9fa;
+$danger: #dc3545;
 
 
 *{
@@ -43,6 +44,12 @@ body{
                 &:hover{
                     background-color: white;
                     color: black;
+                    border-color: transparent;
+                }
+
+                &[data-name="sign-out"]:hover{
+                    background-color: $danger;
+                    color: white;
                 }
             }
         }
