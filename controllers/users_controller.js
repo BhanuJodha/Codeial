@@ -22,7 +22,7 @@ module.exports.deleteSession = (req, res) => {
 }
 
 module.exports.createSession = (req, res) => {
-    return res.redirect("./profile");
+    return res.redirect("/home");
 }
 
 module.exports.create = (req, res) => {

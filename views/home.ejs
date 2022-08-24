@@ -1,15 +1,44 @@
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 <div id="home">
-    <form action="/post/create-post" method="post">
-        <textarea name="content" cols="30" rows="5" placeholder="Enter your post here"></textarea>
-        <input type="submit" value="Post">
-    </form>
+    <% if (locals.user){ %>
+        <form action="/post/create" method="post">
+            <textarea name="content" cols="30" rows="5" placeholder="Enter your post here" required></textarea>
+            <input type="submit" value="Post">
+        </form>
+    <%}%>
     <section>
-        <% if (locals.posts){ for (let i of posts){%>
-            <div>
-                <p><%=i.content%></p>
-                <p><%=i.user.name%></p>
+        <%for (let i of posts){%>
+            <div class="card">
+                <div class="info">
+                    <img src="/images/profile.webp" alt="">
+                    <div>
+                        <p><%=i.user.name%></p>
+                        <p><%=i.createdAt.toLocaleString()%></p>
+                    </div>
+                </div>
+                <p class="content"><%=i.content%></p>
+                <% if (locals.user){ %>
+                    <form action="/post/comment" method="post" class="comment-post">
+                        <input type="text" name="content" placeholder="Write comment here!" required>
+                        <input hidden="true" type="text" name="post" value="<%=i.id%>">
+                        <button type="submit">Post</button>
+                    </form>
+                <%}%>
+                <% for (let j = 0; j < i.comments.length; j++){%>
+                    <div class="comments">
+                        <div class="info">
+                            <img src="/images/profile.webp" alt="">
+                            <div>
+                                <p><%=i.comments[j].user.name%></p>
+                                <p><%=i.comments[j].createdAt.toLocaleString()%></p>
+                            </div>
+                        </div>
+                        <p class="content"><%=i.comments[j].content%></p>
+                    </div>
+                <%}%>
             </div>
-        <%}}%>
+        <%}%>
     </section>
 </div>

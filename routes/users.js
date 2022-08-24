@@ -4,8 +4,6 @@ const passport = require("passport");
 
 const controller = require("../controllers/users_controller");
 
-router.get("/home", passport.userAuthenticated, require("../controllers/home_controller").home);
-
 router.get("/profile", passport.userAuthenticated, controller.userProfile);
 
 router.get("/sign-in", passport.userUnauthenticated, controller.signIn);

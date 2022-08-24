@@ -2,13 +2,15 @@ $primary-color: rgb(33,37,41);
 $font-color-dark: rgba(255, 255, 255, 0.55);
 $secondary-color: #f8f9fa;
 $success: #198754;
+$background-color: rgb(241, 242, 242);
 
 #home{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: $background-color;
     
-    form{
+    &>form{
         width: 80%;
         padding: 1rem;
         display: flex;
@@ -38,6 +40,82 @@ $success: #198754;
                 background-color: $success;
                 color: white;                
                 border-color: transparent;
+            }
+        }
+    }
+
+    section{
+        width: 80%;
+
+        .card{
+            width: 60%;
+            border: 1px solid #dee0e1;
+            background-color: #fff;
+            padding: 0.6rem;
+            margin: 0.3rem 0;
+
+            &>:not(:last-child){
+                margin-bottom: .4em;
+            }
+            
+            .info{
+                width: 100%;
+                display: flex;
+                align-items: center;
+    
+                & *{
+                    font-size: .95em;
+                }
+                
+                img{
+                    width: 2.5em;
+                    height: 2.5em;
+                    border-radius: 50%;
+                    margin-right: .5em;
+                }
+
+                div>:first-child{
+                    font-weight: 500;
+                }
+
+                div>:last-child{
+                    font-size: .9em;
+                }
+            }
+
+            .content{
+                text-align: justify;
+                line-height: 1.4em;
+
+                &::first-letter{
+                    text-transform: capitalize;
+                }
+            }
+
+            .comment-post{
+                display: flex;
+
+                &>:first-child{
+                    flex-grow: 1;
+                    padding: 0.1rem;
+                }
+
+                button{
+                    margin-left: .6rem;
+                    padding: .1rem;
+                    cursor: pointer;
+                }
+            }
+
+            .comments{
+                padding: .3em 0;
+                margin-left: 2em;
+                width: 80%;
+                border-top: 1px solid $primary-color;
+                
+                & *{
+                    font-size: .85em;
+                }
             }
         }
     }

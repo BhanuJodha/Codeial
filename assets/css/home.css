@@ -1,22 +1,23 @@
 #home {
   display: flex;
   flex-direction: column;
-  align-items: center; }
-  #home form {
+  align-items: center;
+  background-color: #f1f2f2; }
+  #home > form {
     width: 80%;
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     border-bottom: 1px solid black; }
-    #home form textarea {
+    #home > form textarea {
       width: 80%;
       height: 5rem;
       background-color: rgba(255, 255, 255, 0.55);
       padding: .5rem;
       resize: none;
       outline: none; }
-    #home form input[type="submit"] {
+    #home > form input[type="submit"] {
       padding: .3rem .5rem;
       color: #212529;
       background-color: transparent;
@@ -24,7 +25,53 @@
       cursor: pointer;
       border-radius: 4px;
       transition: all .2s ease-in-out; }
-      #home form input[type="submit"]:hover {
+      #home > form input[type="submit"]:hover {
         background-color: #198754;
         color: white;
         border-color: transparent; }
+  #home section {
+    width: 80%; }
+    #home section .card {
+      width: 60%;
+      border: 1px solid #dee0e1;
+      background-color: #fff;
+      padding: 0.6rem;
+      margin: 0.3rem 0; }
+      #home section .card > :not(:last-child) {
+        margin-bottom: .4em; }
+      #home section .card .info {
+        width: 100%;
+        display: flex;
+        align-items: center; }
+        #home section .card .info * {
+          font-size: .95em; }
+        #home section .card .info img {
+          width: 2.5em;
+          height: 2.5em;
+          border-radius: 50%;
+          margin-right: .5em; }
+        #home section .card .info div > :first-child {
+          font-weight: 500; }
+        #home section .card .info div > :last-child {
+          font-size: .9em; }
+      #home section .card .content {
+        text-align: justify;
+        line-height: 1.4em; }
+        #home section .card .content::first-letter {
+          text-transform: capitalize; }
+      #home section .card .comment-post {
+        display: flex; }
+        #home section .card .comment-post > :first-child {
+          flex-grow: 1;
+          padding: 0.1rem; }
+        #home section .card .comment-post button {
+          margin-left: .6rem;
+          padding: .1rem;
+          cursor: pointer; }
+      #home section .card .comments {
+        padding: .3em 0;
+        margin-left: 2em;
+        width: 80%;
+        border-top: 1px solid #212529; }
+        #home section .card .comments * {
+          font-size: .85em; }

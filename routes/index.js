@@ -14,8 +14,7 @@ router.use("/user", require("./users"));
 
 router.use("/post", passport.userAuthenticated, require("./posts"));
 
-
-// router.get("/", controller.home);
+router.get("/home", controller.home);
 
 
 module.exports = router;
