@@ -48,7 +48,7 @@ $background-color: rgb(241, 242, 242);
         width: 80%;
 
         .card{
-            width: 60%;
+            width: 70%;
             border: 1px solid #dee0e1;
             background-color: #fff;
             padding: 0.6rem;
@@ -74,12 +74,21 @@ $background-color: rgb(241, 242, 242);
                     margin-right: .5em;
                 }
 
-                div>:first-child{
-                    font-weight: 500;
+                div{
+                    flex-grow: 1;
+                    
+                    &>:first-child{
+                        font-weight: 500;
+                    }
+
+                    &>:last-child{
+                        font-size: .9em;
+                    }
                 }
 
-                div>:last-child{
-                    font-size: .9em;
+                a>span{
+                    font-size: 1.3em;
+                    color: black;
                 }
             }
 

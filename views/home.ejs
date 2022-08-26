@@ -17,6 +17,13 @@
                         <p><%=i.user.name%></p>
                         <p><%=i.createdAt.toLocaleString()%></p>
                     </div>
+                    <% if (locals.user && user.id === i.user.id){ %>
+                    <a href="/post/delete/<%= i.id%>">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </a>
+                    <% } %>
                 </div>
                 <p class="content"><%=i.content%></p>
                 <% if (locals.user){ %>
@@ -34,6 +41,13 @@
                                 <p><%=i.comments[j].user.name%></p>
                                 <p><%=i.comments[j].createdAt.toLocaleString()%></p>
                             </div>
+                            <% if (locals.user && user.id === i.comments[j].user.id){ %>
+                                <a href="/post/delete-comment/<%= i.comments[j].id%>">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </a>
+                            <% } %>
                         </div>
                         <p class="content"><%=i.comments[j].content%></p>
                     </div>
