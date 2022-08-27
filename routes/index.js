@@ -14,6 +14,8 @@ router.use("/user", require("./users"));
 
 router.use("/post", passport.userAuthenticated, require("./posts"));
 
+router.use("/comment", passport.userAuthenticated, require("./comment"));
+
 router.get("/home", controller.home);
 
 

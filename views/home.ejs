@@ -27,7 +27,7 @@
                 </div>
                 <p class="content"><%=i.content%></p>
                 <% if (locals.user){ %>
-                    <form action="/post/comment" method="post" class="comment-post">
+                    <form action="/comment/create" method="post" class="comment-post">
                         <input type="text" name="content" placeholder="Write comment here!" required>
                         <input hidden="true" type="text" name="post" value="<%=i.id%>">
                         <button type="submit">Post</button>
@@ -41,8 +41,8 @@
                                 <p><%=i.comments[j].user.name%></p>
                                 <p><%=i.comments[j].createdAt.toLocaleString()%></p>
                             </div>
-                            <% if (locals.user && user.id === i.comments[j].user.id){ %>
-                                <a href="/post/delete-comment/<%= i.comments[j].id%>">
+                            <% if (locals.user && (user.id === i.user.id || user.id === i.comments[j].user.id)){ %>
+                                <a href="/comment/delete/<%= i.comments[j].id%>">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
