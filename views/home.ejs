@@ -8,51 +8,25 @@
             <input type="submit" value="Post">
         </form>
     <%}%>
-    <section>
-        <%for (let i of posts){%>
-            <div class="card">
-                <div class="info">
-                    <img src="/images/profile.webp" alt="">
-                    <div>
-                        <p><%=i.user.name%></p>
-                        <p><%=i.createdAt.toLocaleString()%></p>
-                    </div>
-                    <% if (locals.user && user.id === i.user.id){ %>
-                    <a href="/post/delete/<%= i.id%>">
-                        <span class="material-symbols-outlined">
-                            delete
-                        </span>
-                    </a>
-                    <% } %>
-                </div>
-                <p class="content"><%=i.content%></p>
-                <% if (locals.user){ %>
-                    <form action="/comment/create" method="post" class="comment-post">
-                        <input type="text" name="content" placeholder="Write comment here!" required>
-                        <input hidden="true" type="text" name="post" value="<%=i.id%>">
-                        <button type="submit">Post</button>
-                    </form>
-                <%}%>
-                <% for (let j = 0; j < i.comments.length; j++){%>
-                    <div class="comments">
-                        <div class="info">
-                            <img src="/images/profile.webp" alt="">
-                            <div>
-                                <p><%=i.comments[j].user.name%></p>
-                                <p><%=i.comments[j].createdAt.toLocaleString()%></p>
-                            </div>
-                            <% if (locals.user && (user.id === i.user.id || user.id === i.comments[j].user.id)){ %>
-                                <a href="/comment/delete/<%= i.comments[j].id%>">
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>
-                                </a>
-                            <% } %>
+    <div>
+        <section>
+            <%for (i of posts){%>
+                <%- include("_post")-%>
+            <%}%>
+        </section>
+        <aside>
+            <h3>Friends :-</h3>
+            <% for (i of profile_user){ %>
+                <a href="/user/profile/<%=i.id%>">
+                    <div class="friends">
+                        <img src="/images/profile.webp" alt="">
+                        <div>
+                            <p><%=i.name%></p>
+                            <p>Since <%=i.createdAt.toLocaleString('default', { month: 'long' , year: "numeric"})%></p>
                         </div>
-                        <p class="content"><%=i.comments[j].content%></p>
                     </div>
-                <%}%>
-            </div>
-        <%}%>
-    </section>
+                </a>
+            <% } %>
+        </aside>
+    </div>
 </div>

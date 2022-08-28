@@ -3,6 +3,12 @@
 
     <div>
         <a href="/home"><li>Home</li></a>
-        <a href="/user/profile"><li>profile</li></a>
+        <% if (locals.user){%>
+            <a href="/user/profile/<%= user.id%>"><li>profile</li></a>
+            <a href="/user/sign-out"><li>sign-out</li></a>
+        <% } else { %>
+            <a href="/user/sign-in"><li>sign-in</li></a>
+            <a href="/user/sign-up"><li>sign-up</li></a>            
+        <% } %>
     </div>
 </div>

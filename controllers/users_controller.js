@@ -27,11 +27,11 @@ module.exports.createSession = (req, res) => {
 
 module.exports.create = (req, res) => {
     if (req.body.password === req.body.confirm_password) {
-        return User.findOne({ email: req.body.email }, (err, doc) => {
+        return User.findOne({ email: req.body.email }, (err, user) => {
             if (err) {
                 return res.end(err.toString());
             }
-            if (!doc) {
+            if (!user) {
                 return User.create(req.body, (err) => {
                     if (err) {
                         return res.end(err.toString());
@@ -48,8 +48,29 @@ module.exports.create = (req, res) => {
 }
 
 module.exports.userProfile = (req, res) => {
-    res.render("user_profile", {
-        title: res.locals.user.name,
-        user: res.locals.user
-    });
+    User.findById(req.params.id, (err, user) => {
+        if(err){
+            console.log(err);
+        }
+        if(user){
+            return res.render("user_profile", {
+                title: user.name,
+                profile_user: user
+            });
+        }
+        res.redirect("back");
+    })
+}
+
+module.exports.updateProfile = (req, res) => {
+    console.log("noobe")
+    if (req.user.id === req.params.id){
+        return User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+            if (err) {
+                console.log(err);
+            }
+            return res.redirect("back");
+        })
+    }
+    return res.status(401).send("Unauthorized");
 }

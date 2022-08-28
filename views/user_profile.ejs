@@ -1,4 +1,13 @@
-<h2>
-    Hello <%=user.name%>.<br>
-    Your email is <%=user.email%>.
-</h2>
+<h1>Codeial Profile</h1>
+<h3>
+    Hello <%=profile_user.name%>.<br>
+    Your email is <%=profile_user.email%>.
+</h3>
+
+<% if (locals.user && user.id === profile_user.id){%>
+    <form action="/user/update/<%=user.id%>" method="post">
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Update</button>
+    </form>
+<% } %>

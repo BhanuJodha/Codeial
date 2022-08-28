@@ -4,11 +4,15 @@ $secondary-color: #f8f9fa;
 $success: #198754;
 $background-color: rgb(241, 242, 242);
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 #home{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $background-color;
     
     &>form{
         width: 80%;
@@ -44,88 +48,119 @@ $background-color: rgb(241, 242, 242);
         }
     }
 
-    section{
+    &>div{
         width: 80%;
+        display: flex;
+        justify-content: space-between;
 
-        .card{
+        section{
             width: 70%;
-            border: 1px solid #dee0e1;
-            background-color: #fff;
-            padding: 0.6rem;
-            margin: 0.3rem 0;
 
-            &>:not(:last-child){
-                margin-bottom: .4em;
+            .card{
+                border: 1px solid #dee0e1;
+                background-color: #fff;
+                padding: 0.6rem;
+                margin: 0.3rem 0;
+    
+                &>:not(:last-child){
+                    margin-bottom: .4em;
+                }
+                
+                .info{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+        
+                    & *{
+                        font-size: .95em;
+                    }
+                    
+                    img{
+                        width: 2.5em;
+                        height: 2.5em;
+                        border-radius: 50%;
+                        margin-right: .5em;
+                    }
+    
+                    div{
+                        flex-grow: 1;
+                        
+                        &>:first-child{
+                            font-weight: 500;
+                        }
+    
+                        &>:last-child{
+                            font-size: .9em;
+                        }
+                    }
+    
+                    a>span{
+                        font-size: 1.3em;
+                        color: black;
+                    }
+                }
+    
+                .content{
+                    text-align: justify;
+                    line-height: 1.4em;
+    
+                    &::first-letter{
+                        text-transform: capitalize;
+                    }
+                }
+    
+                .comment-post{
+                    display: flex;
+    
+                    &>:first-child{
+                        flex-grow: 1;
+                        padding: 0.1rem;
+                    }
+    
+                    button{
+                        margin-left: .6rem;
+                        padding: .1rem;
+                        cursor: pointer;
+                    }
+                }
+    
+                .comments{
+                    padding: .3em 0;
+                    margin-left: 2em;
+                    width: 80%;
+                    border-top: 1px solid $primary-color;
+                    
+                    & *{
+                        font-size: .85em;
+                    }
+                }
             }
+        }
+
+        aside{
+            width: 20%;
             
-            .info{
-                width: 100%;
+            .friends{
+                background-color: $font-color-dark;
                 display: flex;
                 align-items: center;
-    
-                & *{
-                    font-size: .95em;
-                }
-                
+                padding: .2rem;
+                font-size: .85rem;
+                margin: .2rem 0;
+                border: 1px solid #dee0e1;
+
                 img{
-                    width: 2.5em;
-                    height: 2.5em;
-                    border-radius: 50%;
-                    margin-right: .5em;
+                    height: 2.5rem;
+                    width: 2.5rem;
+                    margin-right: .2rem;
                 }
 
-                div{
-                    flex-grow: 1;
-                    
-                    &>:first-child{
-                        font-weight: 500;
-                    }
-
-                    &>:last-child{
-                        font-size: .9em;
-                    }
-                }
-
-                a>span{
-                    font-size: 1.3em;
-                    color: black;
-                }
-            }
-
-            .content{
-                text-align: justify;
-                line-height: 1.4em;
-
-                &::first-letter{
-                    text-transform: capitalize;
-                }
-            }
-
-            .comment-post{
-                display: flex;
-
-                &>:first-child{
-                    flex-grow: 1;
-                    padding: 0.1rem;
-                }
-
-                button{
-                    margin-left: .6rem;
-                    padding: .1rem;
-                    cursor: pointer;
-                }
-            }
-
-            .comments{
-                padding: .3em 0;
-                margin-left: 2em;
-                width: 80%;
-                border-top: 1px solid $primary-color;
-                
-                & *{
-                    font-size: .85em;
+                div>:first-child{
+                    font-weight: 500;
+                    font-size: .9rem;
                 }
             }
         }
     }
+
 }

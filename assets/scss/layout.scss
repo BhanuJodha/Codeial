@@ -2,6 +2,7 @@ $primary-color: rgb(33,37,41);
 $font-color-dark: rgba(255, 255, 255, 0.55);
 $secondary-color: #f8f9fa;
 $danger: #dc3545;
+$background-color: rgb(241, 242, 242);
 
 
 *{
@@ -17,47 +18,53 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
+    #header{
+        position: sticky;
+        top: 0px;
 
-    #header>header{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: $primary-color;
-
-        div{
-            padding: .3rem;
-
-            &:first-child{
-                font-size: 1.5rem;
-                color: white;
-            }
-
-            &:last-child button{
-                padding: .2rem .3rem;
-                color: white;
-                background-color: transparent;
-                border: 1px solid white;
-                cursor: pointer;
-                border-radius: 4px;
-                transition: all .2s ease-in-out;
-
-                &:hover{
-                    background-color: white;
-                    color: black;
-                    border-color: transparent;
-                }
-
-                &[data-name="sign-out"]:hover{
-                    background-color: $danger;
+        &>header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: $primary-color;
+    
+            div{
+                padding: .3rem;
+    
+                &:first-child{
+                    font-size: 1.5rem;
                     color: white;
+                }
+    
+                &:last-child button{
+                    padding: .2rem .3rem;
+                    color: white;
+                    background-color: transparent;
+                    border: 1px solid white;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    transition: all .2s ease-in-out;
+    
+                    &:hover{
+                        background-color: white;
+                        color: black;
+                        border-color: transparent;
+                    }
+    
+                    &[data-name="sign-out"]:hover{
+                        background-color: $danger;
+                        color: white;
+                    }
                 }
             }
         }
     }
+    
 
     #body{
         flex-grow: 1;
-        background-color: $secondary-color;
+        background-color: $background-color;
     }
 
     #footer>div{

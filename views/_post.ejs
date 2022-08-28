@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="info">
+        <img src="/images/profile.webp" alt="">
+        <div>
+            <p><%=i.user.name%></p>
+            <p><%=i.createdAt.toDateString()%></p>
+        </div>
+        <% if (locals.user && user.id === i.user.id){ %>
+        <a href="/post/delete/<%= i.id%>">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </a>
+        <% } %>
+    </div>
+    <p class="content"><%=i.content%></p>
+    <% if (locals.user){ %>
+        <form action="/comment/create" method="post" class="comment-post">
+            <input type="text" name="content" placeholder="Write comment here!" required>
+            <input hidden="true" type="text" name="post" value="<%=i.id%>">
+            <button type="submit">Post</button>
+        </form>
+    <%}%>
+
+    <% for (j = 0; j < i.comments.length; j++){%>
+        <%- include("_comment")-%>
+    <%}%>
+</div>

@@ -50,7 +50,7 @@ passport.userUnauthenticated = (req, res, next) => {
     if (req.isUnauthenticated()) {
         return next();
     }
-    res.redirect("/user/profile");
+    res.redirect("/user/profile/"+ req.user.id);
 }
 
 passport.setLocals = (req, res, next) => {
