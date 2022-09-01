@@ -7,6 +7,8 @@ const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
+const flash = require("connect-flash");
+const custMiddelware = require("./config/middelware");
 
 
 // instantiating config files
@@ -57,6 +59,10 @@ app.use(session({
         }
     )
 }))
+
+// setting flash messages
+app.use(flash());
+app.use(custMiddelware.flash);
 
 // setting passport
 app.use(passport.initialize());

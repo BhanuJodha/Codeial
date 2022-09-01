@@ -12,7 +12,8 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border-bottom: 1px solid black; }
+    border-bottom: 1px solid black;
+    margin-bottom: .5rem; }
     #home > form textarea {
       width: 80%;
       height: 5rem;

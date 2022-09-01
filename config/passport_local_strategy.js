@@ -5,15 +5,16 @@ const User = require("../models/user");
 // authentication using passport
 passport.use(new LocalStrategy({
     usernameField: "email",
-    passwordField: "password"
-}, function (email, password, done) {
+    passwordField: "password",
+    passReqToCallback: true
+}, function (req, email, password, done) {
     User.findOne({ email: email }, (err, user) => {
         if (err) {
-            console.log(err.toString());
+            req.flash("error", err);
             return done(err);
         }
         if (!user || user.password !== password) {
-            console.log("Incorrect password or username");
+            req.flash("error", "Incorrect password or username");
             return done(null, false);
         }
         return done(null, user);
@@ -43,6 +44,7 @@ passport.userAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
+    req.flash("warning", "User is not signed-in")
     res.redirect("/user/sign-in");
 }
 
@@ -50,6 +52,7 @@ passport.userUnauthenticated = (req, res, next) => {
     if (req.isUnauthenticated()) {
         return next();
     }
+    req.flash("warning", "User is already signed-in")
     res.redirect("/user/profile/"+ req.user.id);
 }
 

@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Noty js style and script -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Default Style Sheet -->
     <link rel="stylesheet" href="/css/layout.css">
 
@@ -30,6 +34,45 @@
         <%- include("_footer")%>
     </div>
 
+    <!-- Scripts Section -->
+
     <%- script%>
+
+    <% if (flash.success && flash.success.length > 0) { %>
+        <script>
+            new Noty({
+                theme: "relax",
+                text: "<%= flash.success %>",
+                type: "success",
+                layout: "topRight",
+                timeout: 1500
+            }).show();
+        </script>
+    <% } %>
+    
+    <% if (flash.error && flash.error.length > 0) { %>
+        <script>
+            new Noty({
+                theme: "relax",
+                text: "<%= flash.error %>",
+                type: "error",
+                layout: "topRight",
+                timeout: 2000
+            }).show();
+        </script>
+    <% } %>
+    
+    <% if (flash.warning && flash.warning.length > 0) { %>
+        <script>
+            new Noty({
+                theme: "relax",
+                text: "<%= flash.warning %>",
+                type: "warning",
+                layout: "topRight",
+                timeout: 1500
+            }).show();
+        </script>
+    <% } %>
+
 </body>
 </html>

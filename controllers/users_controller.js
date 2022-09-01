@@ -15,42 +15,44 @@ module.exports.signUp = (req, res) => {
 module.exports.deleteSession = (req, res) => {
     req.logout((err) => {
         if (err){
-            console.log(err);
+            req.flash("error", err);
         }
+        req.flash("success", "Logged out successfully");
         return res.redirect("./sign-in");
     });
 }
 
 module.exports.createSession = (req, res) => {
+    req.flash("success", "Sign in successfully");
     return res.redirect("/home");
 }
 
-module.exports.create = (req, res) => {
-    if (req.body.password === req.body.confirm_password) {
-        return User.findOne({ email: req.body.email }, (err, user) => {
-            if (err) {
-                return res.end(err.toString());
-            }
+module.exports.create = async (req, res) => {
+    try {
+        if (req.body.password === req.body.confirm_password) {
+            let user = await User.findOne({ email: req.body.email });
             if (!user) {
-                return User.create(req.body, (err) => {
-                    if (err) {
-                        return res.end(err.toString());
-                    }
-                    return res.redirect("./sign-in");
-                })
+                await User.create(req.body);
+                req.flash("success", "User successfully created");
             }
-            console.log("User already exists");
+            else{
+                req.flash("error", "User already exists");
+            }
             return res.redirect("./sign-in");
-        })
+        }
+        req.flash("error", "Password unmatch");
+        return res.redirect("back");
+        
+    } catch (err) {
+        console.log("Error : ", err);
+        return;
     }
-    console.log("Error : Password unmatch");
-    return res.redirect("back");
 }
 
 module.exports.userProfile = (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if(err){
-            console.log(err);
+            req.flash("error", err);
         }
         if(user){
             return res.render("user_profile", {
@@ -58,19 +60,21 @@ module.exports.userProfile = (req, res) => {
                 profile_user: user
             });
         }
+        req.flash("warning", "Don't try to fiddle with system");
         res.redirect("back");
     })
 }
 
 module.exports.updateProfile = (req, res) => {
-    console.log("noobe")
     if (req.user.id === req.params.id){
         return User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
             if (err) {
-                console.log(err);
+                req.flash("error", err);
             }
+            req.flash("success", "Profile updated successfully");
             return res.redirect("back");
         })
     }
-    return res.status(401).send("Unauthorized");
+    req.flash("warning", "Unauthorized");
+    return res.status(401).redirect("/home");
 }

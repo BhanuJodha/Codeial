@@ -17,7 +17,7 @@ router.get("/sign-out", passport.userAuthenticated, controller.deleteSession);
 router.post("/create", controller.create);
 
 // getting verified by passport middelware
-router.post("/create-session", passport.authenticate("local", { failureRedirect: "/sign-in" }), controller.createSession)
+router.post("/create-session", passport.authenticate("local", { failureRedirect: "/user/sign-in" }), controller.createSession)
 
 
 module.exports = router;
