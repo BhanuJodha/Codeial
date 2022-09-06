@@ -3,13 +3,13 @@
 
 <div id="home">
     <% if (locals.user){ %>
-        <form action="/post/create" method="post">
+        <form action="/post/create" method="post" id="post-form">
             <textarea name="content" cols="30" rows="5" placeholder="Enter your post here" required></textarea>
             <input type="submit" value="Post">
         </form>
     <%}%>
     <div>
-        <section>
+        <section id="post-container">
             <%for (i of posts){%>
                 <%- include("_post")-%>
             <%}%>
@@ -30,3 +30,5 @@
         </aside>
     </div>
 </div>
+
+<script src="/js/home_post.js"></script>

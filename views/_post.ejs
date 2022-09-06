@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="post-<%=i._id%>">
     <div class="info">
         <img src="/images/profile.webp" alt="">
         <div>
@@ -7,7 +7,7 @@
         </div>
         <% if (locals.user && user.id === i.user.id){ %>
         <a href="/post/delete/<%= i.id%>">
-            <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined" id="delete-post">
                 delete
             </span>
         </a>

@@ -1,17 +1,31 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 
-module.exports.createPost = (req, res) => {
-    Post.create({
-        content: req.body.content,
-        user: req.user._id
-    }, (err, doc) => {
-        if (err) {
-            req.flash("error", err);
+module.exports.createPost = async (req, res) => {
+    try {
+        let post = await Post.create({
+            content: req.body.content,
+            user: req.user._id
+        })
+    
+        // For AJAX Requests
+        if (req.xhr){
+            await post.populate({path: "user", select: "name email -_id"})
+            return res.status(200).json({
+                data: {
+                    post
+                },
+                message: "Post created successfully"
+            });
         }
+    
         req.flash("success", "Post added successfully");
         return res.redirect("back");
-    })
+        
+    } catch (err) {
+        console.log("Error : ", err);
+        return;
+    }
 }
 
 module.exports.deletePost = async (req, res) => {
@@ -20,11 +34,33 @@ module.exports.deletePost = async (req, res) => {
         if (post.user.toString() === req.user.id) {
             await Comment.deleteMany({post: post._id});
             post.remove();
+            // For AJAX Requests
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        post_id: post.id
+                    },
+                    message: "Post and associated comments deleted"
+                });
+            }
+
             req.flash("success", "Post and associated comments deleted");
         }
         else{
+            // For AJAX Requests
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        post_id: null
+                    },
+                    message: "Don't try to fiddle with system"
+                });
+            }
+            
             req.flash("warning", "Don't try to fiddle with system");
         }
+
+
         return res.redirect("back");
         
     } catch (err) {
