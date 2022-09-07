@@ -1,4 +1,3 @@
-const { flash } = require("../config/middelware");
 const Post = require("../models/post");
 const User = require("../models/user");
 
@@ -9,6 +8,9 @@ module.exports.home = async (req, res) => {
             .populate("user")
             .populate({
                 path: "comments",
+                options: {
+                    sort: "-createdAt"
+                },
                 populate: {
                     path: "user"
                 }

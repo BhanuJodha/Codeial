@@ -11,39 +11,40 @@
             type: "post",
             data: postForm.serialize(),
             success: (data) => {
+                success(data.message);
                 addPostToDom(data.data.post);
             },
             error: (err) => {
-                console.error(err.responseText);
+                error(err.responseText);
             }
         })
     }
 
     // Add post to DOM
-    const addPostToDom = (data) => {
-        let post = $(
-            `<div class="card" id="post-${data._id}">
+    const addPostToDom = (post) => {
+        let newPost = $(
+            `<div class="card" id="post-${post._id}">
                 <div class="info">
                     <img src="/images/profile.webp" alt="">
                     <div>
-                        <p>${data.user.name}</p>
-                        <p>${new Date(data.createdAt).toDateString()}</p>
+                        <p>${post.user.name}</p>
+                        <p>${new Date(post.createdAt).toDateString()}</p>
                     </div>
-                    <a href="/post/delete/${ data._id}">
+                    <a href="/post/delete/${ post._id}">
                         <span class="material-symbols-outlined" id="delete-post">
                             delete
                         </span>
                     </a>
                 </div>
-                <p class="content">${data.content}</p>
+                <p class="content">${post.content}</p>
                 <form action="/comment/create" method="post" class="comment-post">
                     <input type="text" name="content" placeholder="Write comment here!" required>
-                    <input hidden="true" type="text" name="post" value="${data._id}">
+                    <input hidden="true" type="text" name="post" value="${post._id}">
                     <button type="submit">Post</button>
                 </form>
             </div>`
         );
-        postContainer.prepend(post);
+        postContainer.prepend(newPost);
         postForm.children("textarea").val("");
     }
 
@@ -51,10 +52,13 @@
         $.ajax({
             url: element.prop("href"),
             type: "get",
-            success: (data)=>{
+            success: (data)=>{ 
+                success(data.message);
                 $(`#post-${data.data.post_id}`).remove();
             },
-            error: (err)=>{console.log(err.responseText)}
+            error: (err)=>{
+                warning(err.responseText);
+            }
         })
     }
 

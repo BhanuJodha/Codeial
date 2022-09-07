@@ -15,14 +15,17 @@
     </div>
     <p class="content"><%=i.content%></p>
     <% if (locals.user){ %>
-        <form action="/comment/create" method="post" class="comment-post">
+        <form action="/comment/create" method="post" class="comment-post" id="comment-form">
             <input type="text" name="content" placeholder="Write comment here!" required>
             <input hidden="true" type="text" name="post" value="<%=i.id%>">
             <button type="submit">Post</button>
         </form>
     <%}%>
 
-    <% for (j = 0; j < i.comments.length; j++){%>
-        <%- include("_comment")-%>
-    <%}%>
+    <div class="comment-container">
+        <% for (j = 0; j < i.comments.length; j++){%>
+            <%- include("_comment")-%>
+        <%}%>
+
+    </div>
 </div>

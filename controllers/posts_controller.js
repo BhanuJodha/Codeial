@@ -31,7 +31,7 @@ module.exports.createPost = async (req, res) => {
 module.exports.deletePost = async (req, res) => {
     try {
         let post = await Post.findById(req.params.id);
-        if (post.user.toString() === req.user.id) {
+        if (post && post.user.toString() === req.user.id) {
             await Comment.deleteMany({post: post._id});
             post.remove();
             // For AJAX Requests
@@ -49,12 +49,7 @@ module.exports.deletePost = async (req, res) => {
         else{
             // For AJAX Requests
             if (req.xhr){
-                return res.status(200).json({
-                    data: {
-                        post_id: null
-                    },
-                    message: "Don't try to fiddle with system"
-                });
+                return res.status(401).send("Don't try to fiddle with system");
             }
             
             req.flash("warning", "Don't try to fiddle with system");

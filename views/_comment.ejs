@@ -1,4 +1,4 @@
-<div class="comments">
+<div class="comments" id="comment-<%= i.comments[j].id%>">
     <div class="info">
         <img src="/images/profile.webp" alt="">
         <div>
@@ -7,7 +7,7 @@
         </div>
         <% if (locals.user && (user.id === i.user.id || user.id === i.comments[j].user.id)){ %>
             <a href="/comment/delete/<%= i.comments[j].id%>">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" id="delete-comment">
                     delete
                 </span>
             </a>
