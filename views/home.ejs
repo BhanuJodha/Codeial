@@ -19,7 +19,7 @@
             <% for (i of profile_user){ %>
                 <a href="/user/profile/<%=i.id%>">
                     <div class="friends">
-                        <img src="/images/profile.webp" alt="">
+                        <img src="<%= i.avatar %>" alt="<%= i.name %>">
                         <div>
                             <p><%=i.name%></p>
                             <p>Since <%=i.createdAt.toLocaleString('default', { month: 'long' , year: "numeric"})%></p>

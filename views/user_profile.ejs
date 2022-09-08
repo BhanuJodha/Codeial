@@ -5,9 +5,10 @@
 </h3>
 
 <% if (locals.user && user.id === profile_user.id){%>
-    <form action="/user/update/<%=user.id%>" method="post">
-        <input type="text" name="name" placeholder="Enter your name" required>
-        <input type="email" name="email" placeholder="Enter your email" required>
+    <form action="/user/update/<%=user.id%>" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Enter your name" value="<%=user.name%>" required>
+        <input type="email" name="email" placeholder="Enter your email" value="<%=user.email%>" required>
+        <input type="file" name="avatar" placeholder="Upload profile picture">
         <button type="submit">Update</button>
     </form>
 <% } %>

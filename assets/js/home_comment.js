@@ -24,7 +24,7 @@
         let newComment = $(
             `<div class="comments" id="comment-${ comment._id}">
             <div class="info">
-                <img src="/images/profile.webp" alt="">
+                <img src="${comment.user.avatar}" alt="${comment.user.name}">
                 <div>
                     <p>${comment.user.name}</p>
                     <p>${new Date(comment.createdAt).toLocaleString()}</p>

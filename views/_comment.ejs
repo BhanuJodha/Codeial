@@ -1,6 +1,6 @@
 <div class="comments" id="comment-<%= i.comments[j].id%>">
     <div class="info">
-        <img src="/images/profile.webp" alt="">
+        <img src="<%= i.comments[j].user.avatar %>" alt="<%= i.comments[j].user.name %>">
         <div>
             <p><%=i.comments[j].user.name%></p>
             <p><%=i.comments[j].createdAt.toLocaleString()%></p>

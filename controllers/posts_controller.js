@@ -10,7 +10,7 @@ module.exports.createPost = async (req, res) => {
     
         // For AJAX Requests
         if (req.xhr){
-            await post.populate({path: "user", select: "name email -_id"})
+            await post.populate({path: "user", select: "name email avatar -_id"})
             return res.status(200).json({
                 data: {
                     post

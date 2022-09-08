@@ -28,6 +28,9 @@ app.use(sassMiddleware({
 // setting statics
 app.use(express.static("./assets"));
 
+// setting statics for profile picture
+app.use("/uploads", express.static("./uploads"));
+
 // setting cookie parser
 app.use(cookieParser());
 

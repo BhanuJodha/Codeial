@@ -25,7 +25,7 @@
         let newPost = $(
             `<div class="card" id="post-${post._id}">
                 <div class="info">
-                    <img src="/images/profile.webp" alt="">
+                    <img src="${post.user.avatar}" alt="${post.user.name}">
                     <div>
                         <p>${post.user.name}</p>
                         <p>${new Date(post.createdAt).toDateString()}</p>

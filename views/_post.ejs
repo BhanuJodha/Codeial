@@ -1,6 +1,6 @@
 <div class="card" id="post-<%=i._id%>">
     <div class="info">
-        <img src="/images/profile.webp" alt="">
+        <img src="<%= i.user.avatar %>" alt="<%= i.user.name %>">
         <div>
             <p><%=i.user.name%></p>
             <p><%=i.createdAt.toDateString()%></p>

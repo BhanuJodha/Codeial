@@ -16,7 +16,7 @@ module.exports.createComment = async (req, res) => {
             if (req.xhr){
                 await comment.populate({
                     path: "user", 
-                    select: "name email -_id"
+                    select: "name email avatar -_id"
                 })
 
                 return res.status(200).json({
