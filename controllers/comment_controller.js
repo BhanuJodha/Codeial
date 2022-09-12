@@ -11,7 +11,7 @@ module.exports.createComment = async (req, res) => {
                 post: post._id,
             });
             post.comments.push(comment._id);
-            post.save();
+            await post.save();
             // For AJAX Requests
             if (req.xhr){
                 await comment.populate({

@@ -37,11 +37,13 @@
                     </a>
                 </div>
                 <p class="content">${post.content}</p>
-                <form action="/comment/create" method="post" class="comment-post">
+                <form action="/comment/create" method="post" class="comment-post" id="comment-form">
                     <input type="text" name="content" placeholder="Write comment here!" required>
                     <input hidden="true" type="text" name="post" value="${post._id}">
                     <button type="submit">Post</button>
                 </form>
+                <div class="comment-container">
+                </div>
             </div>`
         );
         postContainer.prepend(newPost);

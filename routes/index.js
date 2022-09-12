@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const custMiddelware = require("../config/middelware");
 
 const controller = require("../controllers/home_controller");
 
@@ -9,6 +10,11 @@ router.use(express.urlencoded({
     extended: false
 }))
 
+// API routing
+router.use("/api", require("./api/index"));
+
+// custom middelware for flash messages
+router.use(custMiddelware.flash);
 
 router.use("/user", require("./users"));
 
@@ -17,6 +23,5 @@ router.use("/post", passport.userAuthenticated, require("./posts"));
 router.use("/comment", passport.userAuthenticated, require("./comment"));
 
 router.get("/home", controller.home);
-
 
 module.exports = router;

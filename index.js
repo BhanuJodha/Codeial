@@ -2,19 +2,18 @@ const express = require("express");
 const port = 8000;
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
+const db = require("./config/mongoose");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
-const custMiddelware = require("./config/middelware");
 
 
-// instantiating config files
+// passport authentication files
+const passport = require("passport");
 const passportLocal = require("./config/passport_local_strategy");
-const db = require("./config/mongoose");
-
+const passportJwt = require("./config/passport_jwt_strategy");
 
 // setting SASS or SCSS
 app.use(sassMiddleware({
@@ -31,9 +30,6 @@ app.use(express.static("./assets"));
 // setting statics for profile picture
 app.use("/uploads", express.static("./uploads"));
 
-// setting cookie parser
-app.use(cookieParser());
-
 // setting layouts
 app.use(expressLayouts);
 app.set("layout extractStyles", true);
@@ -43,14 +39,18 @@ app.set("layout extractScripts", true);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+// setting cookie parser
+app.use(cookieParser());
+
 // setting session cookies
 app.use(session({
     name: "Codial",
     secret: "Secure3D#",
     saveUninitialized: false,
     resave: false,
+    rolling: false,
     cookie: {
-        maxAge: 600000
+        maxAge: 300000
     },
     store: new MongoStore(
         {
@@ -65,7 +65,6 @@ app.use(session({
 
 // setting flash messages
 app.use(flash());
-app.use(custMiddelware.flash);
 
 // setting passport
 app.use(passport.initialize());

@@ -72,7 +72,7 @@ module.exports.updateProfile = async (req, res) => {
         if (req.user.id === req.params.id) {
             let user = await User.findById(req.params.id);
 
-            return User.uploadedAvatar(req, res, (err) => {
+            return User.uploadedAvatar(req, res, async (err) => {
                 if (err) {
                     return console.log(err);
                 }
@@ -88,7 +88,7 @@ module.exports.updateProfile = async (req, res) => {
                 user.name = req.body.name;
                 user.email = req.body.email;
 
-                user.save();
+                await user.save();
 
                 req.flash("success", "Profile updated successfully");
                 return res.redirect("back");

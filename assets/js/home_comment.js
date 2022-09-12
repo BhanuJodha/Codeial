@@ -1,17 +1,13 @@
 {
-    const commentForm = $("#comment-form");
-
     // Create a new comment
-    const createComment = (e) => {
-        e.preventDefault();
-
+    const createComment = (form) => {
         $.ajax({
             url: "/comment/create",
             type: "post",
-            data: commentForm.serialize(),
+            data: form.serialize(),
             success: (data) => {
                 success(data.message);
-                addCommentToDom(data.data.comment);
+                addCommentToDom(form, data.data.comment);
             },
             error: (err) => {
                 warning(err.responseText);
@@ -20,7 +16,7 @@
     }
 
     // Add Comment to DOM
-    const addCommentToDom = (comment) => {
+    const addCommentToDom = (form, comment) => {
         let newComment = $(
             `<div class="comments" id="comment-${ comment._id}">
             <div class="info">
@@ -39,7 +35,7 @@
             </div>`
         );
         $(`#post-${comment.post}>.comment-container`).prepend(newComment);
-        commentForm.children("input[name=content]").val("");
+        form.children("input[name=content]").val("");
     }
 
     // Delete comment
@@ -58,14 +54,22 @@
     }
 
     const clickHandler = function(e){
-        if (e.target.id === "delete-comment"){
+        let target = e.target;
+        if (target.id === "delete-comment"){
             e.preventDefault();
             deleteComment($(e.target).parent());
         }
     }
+    
+    const submitHandler = function(e){
+        let target = e.target;     
+        if (target.id === "comment-form"){
+            e.preventDefault();
+            createComment($(target));
+        } 
+    }
 
     // Event listener
-
-    commentForm.submit(createComment);
     $(document).click(clickHandler);
+    $(document).submit(submitHandler);
 }
