@@ -4,6 +4,10 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif; }
 
+a {
+  text-decoration: none;
+  color: black; }
+
 /* Body Section */
 body {
   display: flex;
@@ -22,21 +26,33 @@ body {
         body #header > header div:first-child {
           font-size: 1.5rem;
           color: white; }
-        body #header > header div:last-child button {
-          padding: .2rem .3rem;
-          color: white;
-          background-color: transparent;
-          border: 1px solid white;
-          cursor: pointer;
-          border-radius: 4px;
-          transition: all .2s ease-in-out; }
-          body #header > header div:last-child button:hover {
-            background-color: white;
-            color: black;
-            border-color: transparent; }
-          body #header > header div:last-child button[data-name="sign-out"]:hover {
-            background-color: #dc3545;
-            color: white; }
+        body #header > header div:last-child {
+          display: flex;
+          align-items: center; }
+          body #header > header div:last-child > img {
+            height: 2rem;
+            width: 2rem;
+            border-radius: .3rem;
+            border: 1px solid rgba(255, 255, 255, 0.55); }
+          body #header > header div:last-child > span {
+            padding: 0 .5rem;
+            color: rgba(255, 255, 255, 0.55); }
+          body #header > header div:last-child button {
+            padding: .2rem .3rem;
+            margin-left: .3rem;
+            color: white;
+            background-color: transparent;
+            border: 1px solid white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all .2s ease-in-out; }
+            body #header > header div:last-child button:hover {
+              background-color: white;
+              color: black;
+              border-color: transparent; }
+            body #header > header div:last-child button[data-name="sign-out"]:hover {
+              background-color: #dc3545;
+              color: white; }
   body #body {
     flex-grow: 1;
     background-color: #f1f2f2; }

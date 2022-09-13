@@ -12,6 +12,10 @@ $background-color: rgb(241, 242, 242);
     font-family: 'Poppins', sans-serif;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
 
 /* Body Section */
 body{
@@ -31,32 +35,51 @@ body{
     
             div{
                 padding: .3rem;
-    
+
                 &:first-child{
                     font-size: 1.5rem;
                     color: white;
                 }
-    
-                &:last-child button{
-                    padding: .2rem .3rem;
-                    color: white;
-                    background-color: transparent;
-                    border: 1px solid white;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    transition: all .2s ease-in-out;
-    
-                    &:hover{
-                        background-color: white;
-                        color: black;
-                        border-color: transparent;
+                
+                &:last-child{
+                    display: flex;
+                    align-items: center;
+
+                    &>img{
+                        height: 2rem;
+                        width: 2rem;
+                        border-radius: .3rem;
+                        border: 1px solid $font-color-dark;
                     }
-    
-                    &[data-name="sign-out"]:hover{
-                        background-color: $danger;
+
+                    &>span{
+                        padding: 0 .5rem;
+                        color: $font-color-dark;
+                    }
+                
+                    & button{
+                        padding: .2rem .3rem;
+                        margin-left: .3rem;
                         color: white;
+                        background-color: transparent;
+                        border: 1px solid white;
+                        cursor: pointer;
+                        border-radius: 4px;
+                        transition: all .2s ease-in-out;
+        
+                        &:hover{
+                            background-color: white;
+                            color: black;
+                            border-color: transparent;
+                        }
+        
+                        &[data-name="sign-out"]:hover{
+                            background-color: $danger;
+                            color: white;
+                        }
                     }
-                }
+
+                }  
             }
         }
     }

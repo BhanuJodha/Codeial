@@ -1,14 +1,25 @@
-<h1>Codeial Profile</h1>
-<h3>
-    Hello <%=profile_user.name%>.<br>
-    Your email is <%=profile_user.email%>.
-</h3>
+<link rel="stylesheet" href="/css/profile.css">
 
-<% if (locals.user && user.id === profile_user.id){%>
-    <form action="/user/update/<%=user.id%>" method="post" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Enter your name" value="<%=user.name%>" required>
-        <input type="email" name="email" placeholder="Enter your email" value="<%=user.email%>" required>
-        <input type="file" name="avatar" placeholder="Upload profile picture">
-        <button type="submit">Update</button>
-    </form>
-<% } %>
+<div id="profile">
+    
+    <section class="user-card">
+        <img src="<%=profile_user.avatar%>" alt="">
+        <h3><%=profile_user.name%> (<%=profile_user.email%>)</h3>
+
+        <% if (locals.user && user.id === profile_user.id){%>
+            <form action="/user/update/<%=user.id%>" method="post" enctype="multipart/form-data">
+                <label for="name">Enter your name : </label>
+                <input type="text" name="name" placeholder="Enter your name" value="<%=user.name%>" required>
+                <label for="email">Enter your email : </label>
+                <input type="email" name="email" placeholder="Enter your email" value="<%=user.email%>" required>
+                <label for="password">Enter your password : </label>
+                <input type="password" name="password" placeholder="Enter your password" value="<%=user.password%>" required>
+                <label for="avatar">Select your avatar : </label>
+                <input type="file" name="avatar" placeholder="Upload profile picture">
+                <button type="submit">Update</button>
+            </form>
+        <% } %>
+
+    </section>    
+
+</div>

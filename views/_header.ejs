@@ -1,8 +1,10 @@
 <header>
-    <div>Codeial</div>
+    <a href="/home"><div>Codeial</div></a>
 
     <div>
     <% if (locals.user){%>
+        <img src="<%=user.avatar%>">
+        <span><%=user.name%></span>
         <a href="/user/sign-out"><button data-name="sign-out">Sign Out</button></a>
     <%}else{%>
         <a href="/user/sign-in"><button>Sign In</button></a>

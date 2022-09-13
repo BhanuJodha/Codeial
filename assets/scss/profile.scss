@@ -1,0 +1,44 @@
+$primary-color: rgb(33,37,41);
+$font-color-dark: rgba(255, 255, 255, 0.55);
+$secondary-color: #f8f9fa;
+$success: #198754;
+$background-color: rgb(241, 242, 242);
+
+#profile{
+
+    .user-card{
+        width: 80%;
+        background-color: #a4a4a4;
+        border-radius: 5rem;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &>*{
+            margin: .5rem;            
+        }
+                
+        &>img{
+            height: 12rem;
+            width: 12rem;
+            border-radius: 50%;
+        }
+
+        &>form{
+            background-color: $background-color;
+            border-radius: 1rem;
+            width: 70%;
+            padding: .5rem;
+            display: flex;
+            flex-direction: column;
+
+            &>button{
+                width: 5rem;
+                cursor: pointer;
+                align-self: center;
+            }
+        }
+    }
+
+}
