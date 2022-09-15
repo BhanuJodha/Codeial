@@ -14,6 +14,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const passportLocal = require("./config/passport_local_strategy");
 const passportJwt = require("./config/passport_jwt_strategy");
+const passportGoogle = require("./config/passport_google_oauth2_strategy");
 
 // setting SASS or SCSS
 app.use(sassMiddleware({
@@ -38,6 +39,11 @@ app.set("layout extractScripts", true);
 // setting view engine
 app.set("view engine", "ejs");
 app.set("views", "./views");
+
+// Extracting x-www-form-urlencoded form
+app.use(express.urlencoded({
+    extended: false
+}))
 
 // setting cookie parser
 app.use(cookieParser());

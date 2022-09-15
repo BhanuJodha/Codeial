@@ -5,11 +5,6 @@ const custMiddelware = require("../config/middelware");
 
 const controller = require("../controllers/home_controller");
 
-// for form data
-router.use(express.urlencoded({
-    extended: false
-}))
-
 // API routing
 router.use("/api", require("./api/index"));
 
