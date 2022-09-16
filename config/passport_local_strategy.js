@@ -44,6 +44,9 @@ passport.userAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
+    if (req.xhr){
+        return res.status(401).send("User is not signed-in");
+    }
     req.flash("warning", "User is not signed-in")
     res.redirect("/user/sign-in");
 }
