@@ -1,6 +1,6 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
-const postMailer = require("../mailers/post_mailer");
+const queue = require("../workers/post_email_worker");
 
 module.exports.createPost = async (req, res) => {
     try {
@@ -15,7 +15,12 @@ module.exports.createPost = async (req, res) => {
         })
 
         // For sending mail to the user
-        postMailer.newPost(post);
+        let job = queue.create("newPost", post).save((err) => {
+            if (err) {
+                return console.log("Error in enqueue :", err);
+            }
+            console.log("Job enqueued", job.id);
+        })
 
         // For AJAX Requests
         if (req.xhr) {
@@ -47,7 +52,12 @@ module.exports.deletePost = async (req, res) => {
                 select: "name email avatar -_id"
             });
 
-            postMailer.deletePost(post);
+            let job = queue.create("deletePost", post).save((err) => {
+                if (err) {
+                    return console.log("Error in enqueue :", err);
+                }
+                console.log("Job enqueued", job.id);
+            })
 
             post.remove();
 

@@ -1,6 +1,6 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
-const commentMailer = require("../mailers/comment_mailer");
+const queue = require("../workers/comment_email_worker");
 
 module.exports.createComment = async (req, res) => {
     try {
@@ -15,15 +15,20 @@ module.exports.createComment = async (req, res) => {
             await post.save();
 
             await comment.populate({
-                path: "user", 
+                path: "user",
                 select: "name email avatar -_id"
             })
 
             // For sending mail to the user
-            commentMailer.newComment(comment);
+            let job = queue.create("newComment", comment).save((err) => {
+                if (err) {
+                    return console.log("Error in enqueue :", err);
+                }
+                console.log("Job enqueued", job.id);
+            })
 
             // For AJAX Requests
-            if (req.xhr){
+            if (req.xhr) {
                 return res.status(200).json({
                     data: {
                         comment
@@ -34,9 +39,9 @@ module.exports.createComment = async (req, res) => {
 
             req.flash("success", "Comment added successfully");
         }
-        else{
+        else {
             // For AJAX Requests
-            if (req.xhr){
+            if (req.xhr) {
                 return res.status(401).send("Don't try to fiddle with system");
             }
 
@@ -56,19 +61,24 @@ module.exports.deleteComment = async (req, res) => {
 
         if (comment && (comment.user.toString() === req.user.id || comment.post.user.toString() === req.user.id)) {
             await Post.findByIdAndUpdate(comment.post, { $pull: { comments: comment._id } });
-            
+
             await comment.populate({
-                path: "user", 
+                path: "user",
                 select: "name email avatar -_id"
             })
-            
+
             // For sending mail to the user
-            commentMailer.deleteComment(comment);
-            
+            let job = queue.create("deleteComment", comment).save((err) => {
+                if (err) {
+                    return console.log("Error in enqueue :", err);
+                }
+                console.log("Job enqueued", job.id);
+            })
+
             comment.remove();
-            
+
             // For AJAX Requests
-            if (req.xhr){
+            if (req.xhr) {
                 return res.status(200).json({
                     data: {
                         comment_id: comment.id
@@ -79,12 +89,12 @@ module.exports.deleteComment = async (req, res) => {
 
             req.flash("success", "Comment deleted successfully");
         }
-        else{
+        else {
             // For AJAX Requests
-            if (req.xhr){
+            if (req.xhr) {
                 return res.status(401).send("Don't try to fiddle with system");
             }
-            
+
             req.flash("warning", "Don't try to fiddle with system");
         }
 
