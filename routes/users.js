@@ -4,6 +4,8 @@ const passport = require("passport");
 
 const controller = require("../controllers/users_controller");
 
+router.use("/forgot-password", require("./reset_password"));
+
 router.get("/profile/:id", controller.userProfile);
 
 router.post("/update/:id", passport.userAuthenticated, controller.updateProfile);

@@ -1,0 +1,14 @@
+<div>
+    <h2>Hello <%= token.user.name%>!</h2>
+    <br>
+    <p>Your password reset link
+        <a href="http:/127.0.0.1:8000/user/forgot-password/<%=token.accessToken%>" target="_blank">
+            127.0.0.1:8000/user/forgot-password/<%=token.accessToken%>
+        </a>
+        is now active for 3 minutes.
+        <i>please do not share it</i>
+    </p>
+    <br>
+    <br>
+    <span>Thank you</span>
+</div>

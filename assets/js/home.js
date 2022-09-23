@@ -4,7 +4,7 @@ const warning = (msg) =>{
         text: msg,
         type: "warning",
         layout: "topRight",
-        timeout: 1500
+        timeout: 2000
     }).show();
 }
 
@@ -14,7 +14,7 @@ const success = (msg) =>{
         text: msg,
         type: "success",
         layout: "topRight",
-        timeout: 1500
+        timeout: 2000
     }).show();
 }
 
