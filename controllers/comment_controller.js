@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
+const Like = require("../models/like");
 const queue = require("../workers/comment_email_worker");
 
 module.exports.createComment = async (req, res) => {
@@ -60,7 +61,9 @@ module.exports.deleteComment = async (req, res) => {
         let comment = await Comment.findById(req.params.id).populate("post");
 
         if (comment && (comment.user.toString() === req.user.id || comment.post.user.toString() === req.user.id)) {
+            // deleting associated likes and delinking from post
             await Post.findByIdAndUpdate(comment.post, { $pull: { comments: comment._id } });
+            await Like.deleteMany({_id: {$in: comment.likes}});
 
             await comment.populate({
                 path: "user",

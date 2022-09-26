@@ -30,6 +30,14 @@
                         delete
                     </span>
                 </a>
+                <a href="/like/?id=${ comment._id}&onModel=Comment">
+                    <span class="material-symbols-outlined like">
+                        thumb_up
+                    </span>
+                </a>
+                <span class="like-count">
+                    0
+                </span>
             </div>
             <p class="content">${comment.content}</p>
             </div>`

@@ -35,6 +35,8 @@
     justify-content: space-between; }
     #home > div section {
       width: 70%; }
+      #home > div section a {
+        line-height: 0; }
       #home > div section .card {
         border: 1px solid #dee0e1;
         background-color: #fff;
@@ -67,15 +69,22 @@
           line-height: 1.4em; }
           #home > div section .card .content::first-letter {
             text-transform: capitalize; }
-        #home > div section .card .comment-post {
-          display: flex; }
-          #home > div section .card .comment-post > :first-child {
+        #home > div section .card .likes-comments {
+          display: flex;
+          align-items: center; }
+          #home > div section .card .likes-comments .like-count {
+            margin-left: .3rem;
+            font-weight: 500; }
+          #home > div section .card .likes-comments .comment-post {
             flex-grow: 1;
-            padding: 0.1rem; }
-          #home > div section .card .comment-post button {
-            margin-left: .6rem;
-            padding: .1rem;
-            cursor: pointer; }
+            display: flex; }
+            #home > div section .card .likes-comments .comment-post > :first-child {
+              flex-grow: 1;
+              padding: 0.1rem;
+              margin: 0 .6rem; }
+            #home > div section .card .likes-comments .comment-post button {
+              padding: .1rem;
+              cursor: pointer; }
         #home > div section .card .comments {
           padding: .3em 0;
           margin-left: 2em;

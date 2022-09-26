@@ -15,7 +15,7 @@
                 addPostToDom(data.data.post);
             },
             error: (err) => {
-                error(err.responseText);
+                warning(err.responseText);
             }
         })
     }
@@ -37,11 +37,21 @@
                     </a>
                 </div>
                 <p class="content">${post.content}</p>
-                <form action="/comment/create" method="post" class="comment-post" id="comment-form">
-                    <input type="text" name="content" placeholder="Write comment here!" required>
-                    <input hidden="true" type="text" name="post" value="${post._id}">
-                    <button type="submit">Post</button>
-                </form>
+                <div class="likes-comments">
+                    <a href="/like/?id=${post._id}&onModel=Post">
+                        <span class="material-symbols-outlined like">
+                            thumb_up
+                        </span>
+                    </a>   
+                    <span class="like-count">
+                        0
+                    </span>
+                    <form action="/comment/create" method="post" class="comment-post" id="comment-form">
+                        <input type="text" name="content" placeholder="Write comment here!" required>
+                        <input hidden="true" type="text" name="post" value="${post._id}">
+                        <button type="submit">Post</button>
+                    </form>
+                </div>
                 <div class="comment-container">
                 </div>
             </div>`

@@ -12,6 +12,22 @@
                 </span>
             </a>
         <% } %>
+        <% if (locals.user) { %>
+            <a href="/like/?id=<%= i.comments[j].id%>&onModel=Comment">
+                <span class="material-symbols-outlined like">
+                    thumb_up
+                </span>
+            </a>
+        <% } else { %>
+            <a>
+                <span class="material-symbols-outlined">
+                    thumb_up
+                </span>
+            </a>
+        <% } %>
+        <span class="like-count">
+            <%=i.comments[j].likes.length%>
+        </span>
     </div>
     <p class="content"><%=i.comments[j].content%></p>
 </div>

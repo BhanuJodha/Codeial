@@ -52,6 +52,10 @@ $background-color: rgb(241, 242, 242);
         section{
             width: 70%;
 
+            & a{
+                line-height: 0;
+            }
+            
             .card{
                 border: 1px solid #dee0e1;
                 background-color: #fff;
@@ -104,19 +108,30 @@ $background-color: rgb(241, 242, 242);
                         text-transform: capitalize;
                     }
                 }
-    
-                .comment-post{
+                
+                .likes-comments{
                     display: flex;
-    
-                    &>:first-child{
-                        flex-grow: 1;
-                        padding: 0.1rem;
+                    align-items: center;
+
+                    .like-count{
+                        margin-left: .3rem;
+                        font-weight: 500;
                     }
-    
-                    button{
-                        margin-left: .6rem;
-                        padding: .1rem;
-                        cursor: pointer;
+
+                    .comment-post{
+                        flex-grow: 1;
+                        display: flex;
+        
+                        &>:first-child{
+                            flex-grow: 1;
+                            padding: 0.1rem;
+                            margin: 0 .6rem;
+                        }
+        
+                        button{
+                            padding: .1rem;
+                            cursor: pointer;
+                        }
                     }
                 }
     
