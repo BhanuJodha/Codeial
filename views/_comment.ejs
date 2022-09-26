@@ -7,7 +7,7 @@
         </div>
         <% if (locals.user && (user.id === i.user.id || user.id === i.comments[j].user.id)){ %>
             <a href="/comment/delete/<%= i.comments[j].id%>">
-                <span class="material-symbols-outlined" id="delete-comment">
+                <span class="material-symbols-outlined delete-comment">
                     delete
                 </span>
             </a>

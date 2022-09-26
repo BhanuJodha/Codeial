@@ -26,7 +26,7 @@
                     <p>${new Date(comment.createdAt).toLocaleString()}</p>
                 </div>
                 <a href="/comment/delete/${ comment._id}">
-                    <span class="material-symbols-outlined" id="delete-comment">
+                    <span class="material-symbols-outlined delete-comment">
                         delete
                     </span>
                 </a>
@@ -63,7 +63,7 @@
 
     const clickHandler = function(e){
         let target = e.target;
-        if (target.id === "delete-comment"){
+        if (target.classList[1] === "delete-comment"){
             e.preventDefault();
             deleteComment($(e.target).parent());
         }

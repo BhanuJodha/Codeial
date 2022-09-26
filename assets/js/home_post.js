@@ -31,7 +31,7 @@
                         <p>${new Date(post.createdAt).toDateString()}</p>
                     </div>
                     <a href="/post/delete/${ post._id}">
-                        <span class="material-symbols-outlined" id="delete-post">
+                        <span class="material-symbols-outlined delete-post">
                             delete
                         </span>
                     </a>
@@ -75,7 +75,7 @@
     }
 
     const clickHandler = function(e){
-        if (e.target.id === "delete-post"){
+        if (e.target.classList[1] === "delete-post"){
             e.preventDefault();
             deletePost($(e.target).parent());
         }
