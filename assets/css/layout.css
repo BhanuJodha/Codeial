@@ -8,6 +8,9 @@ a {
   text-decoration: none;
   color: black; }
 
+button, input[type="submit"] {
+  cursor: pointer; }
+
 /* Body Section */
 body {
   display: flex;
@@ -43,7 +46,6 @@ body {
             color: white;
             background-color: transparent;
             border: 1px solid white;
-            cursor: pointer;
             border-radius: 4px;
             transition: all .2s ease-in-out; }
             body #header > header div:last-child button:hover {

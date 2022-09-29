@@ -32,7 +32,6 @@ $background-color: rgb(241, 242, 242);
             color: $primary-color;
             background-color: transparent;
             border: 1px solid $primary-color;
-            cursor: pointer;
             border-radius: 4px;
             transition: all .2s ease-in-out;
 
@@ -130,7 +129,6 @@ $background-color: rgb(241, 242, 242);
         
                         button{
                             padding: .1rem;
-                            cursor: pointer;
                         }
                     }
                 }
@@ -151,7 +149,7 @@ $background-color: rgb(241, 242, 242);
         aside{
             width: 20%;
             
-            .friends{
+            .user-mini{
                 background-color: $font-color-dark;
                 display: flex;
                 align-items: center;

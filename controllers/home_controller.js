@@ -18,10 +18,25 @@ module.exports.home = async (req, res) => {
 
         let user = await User.find({});
 
+        let signedUser = await User.findById(req.user)
+        .populate({
+            path: "following", 
+            populate: {
+                path: "to_user"
+            }
+        })
+        .populate({
+            path: "followers",
+            populate:{
+                path: "by_user"
+            }
+        });
+
         return res.render("home", {
             title: "Home Page",
             posts: post,
-            profile_user: user
+            all_users: user,
+            signed_user: signedUser
         });
 
     } catch (err) {

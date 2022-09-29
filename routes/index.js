@@ -17,6 +17,8 @@ router.use("/post", passport.userAuthenticated, require("./posts"));
 
 router.use("/like", passport.userAuthenticated, require("./likes"))
 
+router.use("/follow", passport.userAuthenticated, require("./follow"))
+
 router.use("/comment", passport.userAuthenticated, require("./comment"));
 
 router.get("/home", controller.home);

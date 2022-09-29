@@ -23,7 +23,19 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "/images/profile.webp"
-    }
+    },
+    following: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Follow"
+        }
+    ],
+    followers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Follow"
+        }
+    ]
 }, {
     timestamps: true
 });

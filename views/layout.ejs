@@ -38,42 +38,24 @@
     </div>
 
     <!-- Scripts Section -->
-
+    <script src="/js/master.js"></script>
     <%- script%>
 
     <% if (flash.success && flash.success.length > 0) { %>
         <script>
-            new Noty({
-                theme: "relax",
-                text: "<%= flash.success %>",
-                type: "success",
-                layout: "topRight",
-                timeout: 1500
-            }).show();
+            success("<%= flash.success %>");
         </script>
     <% } %>
     
     <% if (flash.error && flash.error.length > 0) { %>
         <script>
-            new Noty({
-                theme: "relax",
-                text: "<%= flash.error %>",
-                type: "error",
-                layout: "topRight",
-                timeout: 2000
-            }).show();
+            error("<%= flash.error %>");
         </script>
     <% } %>
     
     <% if (flash.warning && flash.warning.length > 0) { %>
         <script>
-            new Noty({
-                theme: "relax",
-                text: "<%= flash.warning %>",
-                type: "warning",
-                layout: "topRight",
-                timeout: 1500
-            }).show();
+            warning("<%= flash.warning %>");
         </script>
     <% } %>
 

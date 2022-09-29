@@ -18,8 +18,18 @@
                 <input type="file" name="avatar" placeholder="Upload profile picture">
                 <button type="submit">Update</button>
             </form>
+        <% } else if (locals.user) { %>
+            <a href="/follow/<%=profile_user.id%>" id="toggle-follow">
+            <% if (profile_user.followers.find(e => e.by_user.toString() === user.id)) { %>
+                <button>Unfollow</button>
+            <% } else { %>
+                <button>Follow</button>
+            <% } %>
+            </a>
         <% } %>
 
     </section>    
 
 </div>
+
+<script src="/js/profile/profile.js"></script>

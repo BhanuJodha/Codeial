@@ -52,9 +52,11 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.userProfile = (req, res) => {
-    User.findById(req.params.id, (err, user) => {
+    User.findById(req.params.id)
+    .populate("followers")
+    .exec((err, user) => {
         if (err) {
-            req.flash("error", err);
+            console.log("error", err);
         }
         if (user) {
             return res.render("user_profile", {
@@ -64,7 +66,7 @@ module.exports.userProfile = (req, res) => {
         }
         req.flash("warning", "Don't try to fiddle with system");
         res.redirect("back");
-    })
+    });
 }
 
 module.exports.updateProfile = async (req, res) => {

@@ -15,10 +15,36 @@
             <%}%>
         </section>
         <aside>
-            <h3>Friends :-</h3>
-            <% for (i of profile_user){ %>
+            <% if (locals.user){ %>
+                <h3>following :-</h3>
+                <% for (i of signed_user.following){ %>
+                    <a href="/user/profile/<%=i.to_user.id%>">
+                        <div class="user-mini">
+                            <img src="<%= i.to_user.avatar %>" alt="<%= i.to_user.name %>">
+                            <div>
+                                <p><%=i.to_user.name%></p>
+                                <p>Since <%=i.to_user.createdAt.toLocaleString('default', { month: 'long' , year: "numeric"})%></p>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+                <h3>followers :-</h3>
+                <% for (i of signed_user.followers){ %>
+                    <a href="/user/profile/<%=i.by_user.id%>">
+                        <div class="user-mini">
+                            <img src="<%= i.by_user.avatar %>" alt="<%= i.by_user.name %>">
+                            <div>
+                                <p><%=i.by_user.name%></p>
+                                <p>Since <%=i.by_user.createdAt.toLocaleString('default', { month: 'long' , year: "numeric"})%></p>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+            <% } %>
+            <h3>Users :-</h3>
+            <% for (i of all_users){ %>
                 <a href="/user/profile/<%=i.id%>">
-                    <div class="friends">
+                    <div class="user-mini">
                         <img src="<%= i.avatar %>" alt="<%= i.name %>">
                         <div>
                             <p><%=i.name%></p>
@@ -31,7 +57,6 @@
     </div>
 </div>
 
-<script src="/js/home.js"></script>
-<script src="/js/home_post.js"></script>
-<script src="/js/home_comment.js"></script>
-<script src="/js/home_like.js"></script>
+<script src="/js/home/home_post.js"></script>
+<script src="/js/home/home_comment.js"></script>
+<script src="/js/home/home_like.js"></script>
