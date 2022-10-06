@@ -6,15 +6,21 @@ require("../models/message");
 exports.openChat = async (req, res) => {
     try {
         const person = await User.findById(req.params.id).populate("chats");
-        if (person && req.params.id !== req.user.id){
+        if (person && req.params.id !== req.user.id) {
             // check whether previous chat store or not
             let chat = person.chats.find(chat => (chat.user1 == req.user.id || chat.user2 == req.user.id));
 
-            if (chat){
+            if (chat) {
                 // hideing chat id from user
-                chat = await chat.populate({path: "messages", select: "-onChat"});
+                chat = await chat.populate({
+                    path: "messages",
+                    select: "-onChat",
+                    options: {
+                        sort: "-createdAt"
+                    }
+                });
             }
-            else{
+            else {
                 // create new chat
                 chat = await Chat.create({
                     user1: req.user._id,
@@ -36,7 +42,7 @@ exports.openChat = async (req, res) => {
                 },
                 _id: req.user.id,
                 name: req.user.name
-            }, "Secure3D", {expiresIn: "300000"});
+            }, "Secure3D", { expiresIn: "300000" });
 
             return res.status(200).json({
                 data: {

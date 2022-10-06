@@ -21,7 +21,7 @@ class ChatEngine {
         // event listening for incomming messages
         this.socket.on("new-message", (message) => {
             // append message
-            this.messageBox.append(`<li>${message}</li>`);
+            this.messageBox.prepend(`<li>${message}</li>`);
         })
     }
 
@@ -120,7 +120,7 @@ const connectChatServer = (messageBox, authToken) => {
         e.preventDefault();
         let message = target.children("textarea").val();
         chatEngine.sendMessage(message);
-        chatEngine.messageBox.append(`<li class="send">${message}</li>`)
+        chatEngine.messageBox.prepend(`<li class="send">${message}</li>`)
         target.children("textarea").val("");
     });
     return chatEngine;
