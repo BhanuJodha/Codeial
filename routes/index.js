@@ -21,6 +21,8 @@ router.use("/follow", passport.userAuthenticated, require("./follow"))
 
 router.use("/comment", passport.userAuthenticated, require("./comment"));
 
+router.use("/chat", passport.userAuthenticated, require("./chat"));
+
 router.get("/home", controller.home);
 
 module.exports = router;

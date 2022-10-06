@@ -5,18 +5,20 @@ const User = require("../models/user");
 
 passport.use(new JwtStrategy({
     secretOrKey: "Secure3D",
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-}, (payload, done) => {
-    console.log(payload, Date.now())
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    passReqToCallback: true
+}, (req, payload, done) => {
+    console.log("Authenticate",payload.name);
     User.findById(payload._id, (err, user) => {
         if (err){
             console.log(err);
             return done(err, false);
         }
         if(user){
+            req.payload = payload;
             return done(null, user);
         }
-        return done(null, false);
+        return done(new Error("User not found"), false);
     })
 }));
 

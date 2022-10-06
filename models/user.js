@@ -35,7 +35,13 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Follow"
         }
-    ]
+    ],
+    chats: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Chat"
+        }
+    ],
 }, {
     timestamps: true
 });

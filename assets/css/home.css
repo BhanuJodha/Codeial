@@ -104,6 +104,8 @@
           height: 2.5rem;
           width: 2.5rem;
           margin-right: .2rem; }
+        #home > div aside .user-mini div {
+          flex-grow: 1; }
         #home > div aside .user-mini div > :first-child {
           font-weight: 500;
           font-size: .9rem; }

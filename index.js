@@ -9,6 +9,8 @@ const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 
+// setting socket.io files
+const socket = require("./config/socket_io")(app);
 
 // passport authentication files
 const passport = require("passport");

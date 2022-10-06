@@ -1,0 +1,66 @@
+#chat-boxes {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  pointer-events: none; }
+  #chat-boxes .chat-container {
+    pointer-events: all;
+    width: 20em;
+    margin-right: 1em;
+    box-shadow: 0px 0px 10px 2px rgba(65, 65, 65, 0.3);
+    background-color: white;
+    display: flex;
+    flex-direction: column; }
+    #chat-boxes .chat-container > * {
+      padding: .5em; }
+    #chat-boxes .chat-container .chat-header {
+      display: flex;
+      align-items: center;
+      background-color: #212529; }
+      #chat-boxes .chat-container .chat-header img {
+        height: 2em;
+        width: 2em;
+        margin-right: .5em; }
+      #chat-boxes .chat-container .chat-header span {
+        color: white; }
+      #chat-boxes .chat-container .chat-header span.name {
+        font-weight: 500;
+        flex-grow: 1; }
+      #chat-boxes .chat-container .chat-header span.close-chat, #chat-boxes .chat-container .chat-header span.toggle-chat {
+        cursor: pointer;
+        user-select: none; }
+    #chat-boxes .chat-container .message {
+      font-size: .8em;
+      flex-grow: 1;
+      height: 20rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow-y: scroll; }
+      #chat-boxes .chat-container .message li {
+        list-style: none;
+        background-color: #F0F0F1;
+        max-width: 80%;
+        border-radius: 1rem 1rem 1rem 0;
+        padding: .7em;
+        margin: .3em 0; }
+      #chat-boxes .chat-container .message li.send {
+        align-self: flex-end;
+        background-color: #FFF1EA;
+        border-radius: 1rem 1rem 0 1rem; }
+    #chat-boxes .chat-container .send-message {
+      border-top: 1px solid #dee0e1;
+      background-color: #f1f2f2; }
+      #chat-boxes .chat-container .send-message form {
+        display: flex; }
+        #chat-boxes .chat-container .send-message form textarea {
+          flex-grow: 1;
+          outline: none;
+          padding: .3em;
+          resize: none; }
+        #chat-boxes .chat-container .send-message form button {
+          padding: .2em;
+          margin-left: .4em; }

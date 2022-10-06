@@ -164,6 +164,10 @@ $background-color: rgb(241, 242, 242);
                     margin-right: .2rem;
                 }
 
+                div{
+                    flex-grow: 1;
+                }
+
                 div>:first-child{
                     font-weight: 500;
                     font-size: .9rem;

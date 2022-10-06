@@ -25,6 +25,9 @@
                                 <p><%=i.to_user.name%></p>
                                 <p>Since <%=i.to_user.createdAt.toLocaleString('default', { month: 'long' , year: "numeric"})%></p>
                             </div>
+                            <span class="material-symbols-outlined open-chat" data-person="<%=i.to_user.id%>">
+                                chat
+                            </span>
                         </div>
                     </a>
                 <% } %>
@@ -37,6 +40,9 @@
                                 <p><%=i.by_user.name%></p>
                                 <p>Since <%=i.by_user.createdAt.toLocaleString('default', { month: 'long' , year: "numeric"})%></p>
                             </div>
+                            <span class="material-symbols-outlined open-chat" data-person="<%=i.by_user.id%>">
+                                chat
+                            </span>
                         </div>
                     </a>
                 <% } %>
