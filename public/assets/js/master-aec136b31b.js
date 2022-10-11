@@ -1,0 +1,1 @@
+const warning=t=>{new Noty({theme:"relax",text:t,type:"warning",layout:"topRight",timeout:2e3}).show()},success=t=>{new Noty({theme:"relax",text:t,type:"success",layout:"topRight",timeout:2e3}).show()},error=t=>{new Noty({theme:"relax",text:t,type:"error",layout:"topRight",timeout:2e3}).show()};

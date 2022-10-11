@@ -16,10 +16,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Default Style Sheet -->
-    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href=<%=assetPath("/css/layout.css")%>>
 
     <!-- Chat Engine Style -->
-    <link rel="stylesheet" href="/css/chat_box.css">
+    <link rel="stylesheet" href=<%=assetPath("/css/chat_box.css")%>>
     
     <!-- Components Style Sheet -->
     <%- style%>
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Scripts Section -->
-    <script src="/js/master.js"></script>
+    <script src=<%=assetPath("/js/master.js")%>></script>
     
     <% if (flash.success && flash.success.length > 0) { %>
         <script>
@@ -70,7 +70,7 @@
 
     <!-- Chat Engine Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.min.js" integrity="sha512-xzC4RSo+4m1clLhr0pQr6yFjO9bJ0py6+l65SBibI8/pSEU8U4iVZ7xm95WRq8PXw2MKv8SSR3QkqR2jciG5Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/js/chat_engine.js"></script>
+    <script src=<%=assetPath("/js/chat_engine.js")%>></script>
     
 
 </body>

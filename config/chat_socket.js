@@ -1,11 +1,12 @@
 const passport = require("passport");
 const Message = require("../models/message");
 const Chat = require("../models/chat");
+const env = require("./environment");
 
 module.exports = (chatServer) => {
     const io = require("socket.io")(chatServer, {
         cors: {
-            origin: ["http://127.0.0.1:8000"]
+            origin: [env.cros_origin]
         }
     });
 

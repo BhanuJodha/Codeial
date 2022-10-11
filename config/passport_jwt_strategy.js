@@ -2,9 +2,10 @@ const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const User = require("../models/user");
+const env = require("./environment");
 
 passport.use(new JwtStrategy({
-    secretOrKey: "Secure3D",
+    secretOrKey: env.jwt_secret,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     passReqToCallback: true
 }, (req, payload, done) => {

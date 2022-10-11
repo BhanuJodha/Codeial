@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../../../models/user");
+const env = require("../../../config/environment");
 
 module.exports.createSession = async (req, res)=>{
     try {
@@ -8,7 +9,7 @@ module.exports.createSession = async (req, res)=>{
         if (user && user.password === req.body.password){
             return res.status(200).json({
                 data: {
-                    token: jwt.sign(user, "Secure3D", {expiresIn: "100000"})
+                    token: jwt.sign(user, env.jwt_secret, {expiresIn: "100000"})
                 },
                 message: "Success on token"
             })

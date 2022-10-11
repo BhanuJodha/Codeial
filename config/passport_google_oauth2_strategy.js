@@ -4,11 +4,12 @@ const crypto = require("crypto");
 const User = require("../models/user");
 const download = require("download");
 const path = require("path");
+const env = require("./environment");
 
 passport.use(new GoogleStrategy({
-    clientID: "925898070036-oc8fmd2vvcpu10j2l0nh23n3rue9rsk2.apps.googleusercontent.com",
-    clientSecret: "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",
-    callbackURL: "http://localhost:8000/user/oauth/google/callback"
+    clientID: env.google_client_id,
+    clientSecret: env.google_client_secret,
+    callbackURL: env.google_call_back_url
 }, async (accessToken, refershToken, profile, done) => {
     try {
         // Find user in DB

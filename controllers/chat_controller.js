@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Chat = require("../models/chat");
 const jwt = require("jsonwebtoken");
-require("../models/message");
+const env = require("../config/environment");
 
 exports.openChat = async (req, res) => {
     try {
@@ -42,7 +42,7 @@ exports.openChat = async (req, res) => {
                 },
                 _id: req.user.id,
                 name: req.user.name
-            }, "Secure3D", { expiresIn: "300000" });
+            }, env.jwt_secret, { expiresIn: "300000" });
 
             return res.status(200).json({
                 data: {

@@ -1,4 +1,5 @@
 const express = require("express");
+const env = require("./config/environment");
 const port = 8000;
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
@@ -8,6 +9,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
+const path = require("path");
+const logger = require("morgan");
 
 // setting socket.io files
 const socket = require("./config/socket_io")(app);
@@ -18,20 +21,28 @@ const passportLocal = require("./config/passport_local_strategy");
 const passportJwt = require("./config/passport_jwt_strategy");
 const passportGoogle = require("./config/passport_google_oauth2_strategy");
 
+// initializing views helper
+const viewHelper = require("./config/view_helper")(app);
+
 // setting SASS or SCSS
-app.use(sassMiddleware({
-    src: "./assets/scss",
-    dest: "./assets/css",
-    debug: true,
-    outputStyle: "extended",
-    prefix: "/css"
-}))
+if (env.name === "Devlopment"){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, "/scss"),
+        dest: path.join(__dirname, env.asset_path, "/css"),
+        debug: true,
+        outputStyle: "extended",
+        prefix: "/css"
+    }))
+}
 
 // setting statics
-app.use(express.static("./assets"));
+app.use(express.static(path.join(__dirname, env.asset_path)));
 
 // setting statics for profile picture
 app.use("/uploads", express.static("./uploads"));
+
+// setting logger
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 // setting layouts
 app.use(expressLayouts);
@@ -53,7 +64,7 @@ app.use(cookieParser());
 // setting session cookies
 app.use(session({
     name: "Codial",
-    secret: "Secure3D#",
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     rolling: false,
