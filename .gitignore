@@ -2,3 +2,4 @@ node_modules
 uploads/users/avatars/*
 production_logs/*
 dump.rdb
+public

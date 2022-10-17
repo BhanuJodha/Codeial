@@ -1,1 +1,0 @@
-{let e=e=>{e.preventDefault();let l=$(e.currentTarget);$.ajax({type:"get",url:l.prop("href"),success:e=>{"Follow"===l.children().eq(0).text()?l.children().eq(0).text("Unfollow"):l.children().eq(0).text("Follow"),success(e.message)},error:e=>{error(e.responseText)}})};$("#toggle-follow").click(e)}
