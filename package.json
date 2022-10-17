@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod_start": "gulp build && set NODE_ENV=production && pm2 start index.js"
+    "prod_start": "gulp build; export NODE_ENV=\"production\"; pm2 start index.js"
   },
   "author": "Bhanu Pratap Singh Rathore",
   "license": "ISC",
