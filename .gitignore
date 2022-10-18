@@ -4,3 +4,4 @@ production_logs/*
 dump.rdb
 public
 .bash_profile
+rev-manifest.json  
