@@ -1,1 +1,111 @@
-#home{flex-direction:column}#home,#home>form{display:flex;align-items:center}#home>form{width:80%;padding:1rem;justify-content:space-evenly;border-bottom:1px solid #000;margin-bottom:.5rem}#home>form textarea{width:80%;height:5rem;background-color:hsla(0,0%,100%,.55);padding:.5rem;resize:none;outline:none}#home>form input[type=submit]{padding:.3rem .5rem;color:#212529;background-color:transparent;border:1px solid #212529;border-radius:4px;transition:all .2s ease-in-out}#home>form input[type=submit]:hover{background-color:#198754;color:#fff;border-color:transparent}#home>div{width:80%;display:flex;justify-content:space-between}#home>div section{width:70%}#home>div section a{line-height:0}#home>div section .card{border:1px solid #dee0e1;background-color:#fff;padding:.6rem;margin:.3rem 0}#home>div section .card>:not(:last-child){margin-bottom:.4em}#home>div section .card .info{width:100%;display:flex;align-items:center}#home>div section .card .info *{font-size:.95em}#home>div section .card .info img{width:2.5em;height:2.5em;border-radius:50%;margin-right:.5em}#home>div section .card .info div{flex-grow:1}#home>div section .card .info div>:first-child{font-weight:500}#home>div section .card .info div>:last-child{font-size:.9em}#home>div section .card .info a>span{font-size:1.3em;color:#000}#home>div section .card .content{text-align:justify;line-height:1.4em}#home>div section .card .content:first-letter{text-transform:capitalize}#home>div section .card .likes-comments{display:flex;align-items:center}#home>div section .card .likes-comments .like-count{margin-left:.3rem;font-weight:500}#home>div section .card .likes-comments .comment-post{flex-grow:1;display:flex}#home>div section .card .likes-comments .comment-post>:first-child{flex-grow:1;padding:.1rem;margin:0 .6rem}#home>div section .card .likes-comments .comment-post button{padding:.1rem}#home>div section .card .comments{padding:.3em 0;margin-left:2em;width:80%;border-top:1px solid #212529}#home>div section .card .comments *{font-size:.85em}#home>div aside{width:20%}#home>div aside .user-mini{background-color:hsla(0,0%,100%,.55);display:flex;align-items:center;padding:.2rem;font-size:.85rem;margin:.2rem 0;border:1px solid #dee0e1}#home>div aside .user-mini img{height:2.5rem;width:2.5rem;margin-right:.2rem}#home>div aside .user-mini div{flex-grow:1}#home>div aside .user-mini div>:first-child{font-weight:500;font-size:.9rem}
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  #home > form {
+    width: 80%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid black;
+    margin-bottom: .5rem; }
+    #home > form textarea {
+      width: 80%;
+      height: 5rem;
+      background-color: rgba(255, 255, 255, 0.55);
+      padding: .5rem;
+      resize: none;
+      outline: none; }
+    #home > form input[type="submit"] {
+      padding: .3rem .5rem;
+      color: #212529;
+      background-color: transparent;
+      border: 1px solid #212529;
+      border-radius: 4px;
+      transition: all .2s ease-in-out; }
+      #home > form input[type="submit"]:hover {
+        background-color: #198754;
+        color: white;
+        border-color: transparent; }
+  #home > div {
+    width: 80%;
+    display: flex;
+    justify-content: space-between; }
+    #home > div section {
+      width: 70%; }
+      #home > div section a {
+        line-height: 0; }
+      #home > div section .card {
+        border: 1px solid #dee0e1;
+        background-color: #fff;
+        padding: 0.6rem;
+        margin: 0.3rem 0; }
+        #home > div section .card > :not(:last-child) {
+          margin-bottom: .4em; }
+        #home > div section .card .info {
+          width: 100%;
+          display: flex;
+          align-items: center; }
+          #home > div section .card .info * {
+            font-size: .95em; }
+          #home > div section .card .info img {
+            width: 2.5em;
+            height: 2.5em;
+            border-radius: 50%;
+            margin-right: .5em; }
+          #home > div section .card .info div {
+            flex-grow: 1; }
+            #home > div section .card .info div > :first-child {
+              font-weight: 500; }
+            #home > div section .card .info div > :last-child {
+              font-size: .9em; }
+          #home > div section .card .info a > span {
+            font-size: 1.3em;
+            color: black; }
+        #home > div section .card .content {
+          text-align: justify;
+          line-height: 1.4em; }
+          #home > div section .card .content::first-letter {
+            text-transform: capitalize; }
+        #home > div section .card .likes-comments {
+          display: flex;
+          align-items: center; }
+          #home > div section .card .likes-comments .like-count {
+            margin-left: .3rem;
+            font-weight: 500; }
+          #home > div section .card .likes-comments .comment-post {
+            flex-grow: 1;
+            display: flex; }
+            #home > div section .card .likes-comments .comment-post > :first-child {
+              flex-grow: 1;
+              padding: 0.1rem;
+              margin: 0 .6rem; }
+            #home > div section .card .likes-comments .comment-post button {
+              padding: .1rem; }
+        #home > div section .card .comments {
+          padding: .3em 0;
+          margin-left: 2em;
+          width: 80%;
+          border-top: 1px solid #212529; }
+          #home > div section .card .comments * {
+            font-size: .85em; }
+    #home > div aside {
+      width: 20%; }
+      #home > div aside .user-mini {
+        background-color: rgba(255, 255, 255, 0.55);
+        display: flex;
+        align-items: center;
+        padding: .2rem;
+        font-size: .85rem;
+        margin: .2rem 0;
+        border: 1px solid #dee0e1; }
+        #home > div aside .user-mini img {
+          height: 2.5rem;
+          width: 2.5rem;
+          margin-right: .2rem; }
+        #home > div aside .user-mini div {
+          flex-grow: 1; }
+        #home > div aside .user-mini div > :first-child {
+          font-weight: 500;
+          font-size: .9rem; }

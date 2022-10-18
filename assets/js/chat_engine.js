@@ -6,7 +6,7 @@
             this.messageBox = messageBox;
             this.authToken = authToken;
 
-            this.socket = io.connect("http://localhost:5000", {
+            this.socket = io.connect(`${location.protocol}//${location.hostname}:5000`, {
                 extraHeaders: {
                     Authorization: "Bearer " + authToken,
                 },
