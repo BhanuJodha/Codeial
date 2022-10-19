@@ -47,7 +47,7 @@
         // check if chat box open or not
         if (chatContainer.children(`.chat-container[data-person='${personId}']`).length === 0) {
             $.ajax({
-                url: "http://127.0.0.1:8000/chat/" + personId,
+                url: `/chat/${personId}`,
                 type: "get",
                 success: (data) => {
                     // Storing messageBox instance
