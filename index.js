@@ -30,7 +30,7 @@ if (env.name === "Devlopment"){
         src: path.join(__dirname, env.asset_path, "/scss"),
         dest: path.join(__dirname, env.asset_path, "/css"),
         debug: true,
-        outputStyle: "extended",
+        outputStyle: "expanded",
         prefix: "/css"
     }))
 }
@@ -63,7 +63,7 @@ app.use(cookieParser());
 
 // setting session cookies
 app.use(session({
-    name: "Codial",
+    name: "Codeial",
     secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,

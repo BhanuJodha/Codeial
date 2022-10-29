@@ -26,7 +26,7 @@ module.exports.deleteSession = (req, res) => {
 
 module.exports.createSession = (req, res) => {
     req.flash("success", "Sign in successfully");
-    return res.redirect("/home");
+    return res.redirect("/");
 }
 
 module.exports.create = async (req, res) => {
@@ -99,7 +99,7 @@ module.exports.updateProfile = async (req, res) => {
         }
         
         req.flash("warning", "Unauthorized");
-        return res.status(401).redirect("/home");        
+        return res.status(401).redirect("/");        
 
     } catch (err) {
         console.log("error", err);
