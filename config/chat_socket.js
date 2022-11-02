@@ -6,7 +6,8 @@ const env = require("./environment");
 module.exports = (chatServer) => {
     const io = require("socket.io")(chatServer, {
         cors: {
-            origin: [env.cros_origin]
+            origin: env.cros_origin,
+            methods: ["GET", "POST"]
         }
     });
 
