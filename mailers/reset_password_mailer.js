@@ -1,8 +1,9 @@
 const nodeMailer = require("../config/nodemailer");
+const env = require("../config/environment");
 
 exports.resetLink = (token) => {
     nodeMailer.transporter.sendMail({
-        from: "bhanupratap9828103466@gmail.com",
+        from: env.smtp.auth.user,
         to: token.user.email,
         subject: "Password reset link",
         html: nodeMailer.renderTemplate({token}, "/forgot_password/reset_link.ejs")
@@ -16,7 +17,7 @@ exports.resetLink = (token) => {
 
 exports.passwordChanged = (token) => {
     nodeMailer.transporter.sendMail({
-        from: "bhanupratap9828103466@gmail.com",
+        from: env.smtp.auth.user,
         to: token.user.email,
         subject: "Password changed successfully",
         html: nodeMailer.renderTemplate({token}, "/forgot_password/password_changed.ejs")

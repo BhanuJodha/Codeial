@@ -14,13 +14,12 @@ const devlopment = {
     cros_origin: "http://127.0.0.1:8000",
     db: "codial_devlopment",
     smtp: {
-        service: "gmail",
-        host: "smtp.gmail.com",
+        host: "us2.smtp.mailhostbox.com",
         port: 587,
         secure: false,
         auth: {
-            user: "bhanupratap9828103466",
-            pass: "cwhhuyrpgslammqh"
+            user: "codeial@bhanujodha.tech",
+            pass: "^RfoEOj9"
         }
     },
     google_client_id: "925898070036-oc8fmd2vvcpu10j2l0nh23n3rue9rsk2.apps.googleusercontent.com",
@@ -40,13 +39,12 @@ const production = {
     cros_origin: process.env.CODEIAL_CROS_ORIGIN,
     db: process.env.CODEIAL_DB,
     smtp: {
-        service: "gmail",
-        host: "smtp.gmail.com",
+        host: process.env.CODEIAL_SMTP_HOST,
         port: 587,
         secure: false,
         auth: {
-            user: process.env.CODEIAL_GMAIL_USERNAME,
-            pass: process.env.CODEIAL_GMAIL_PASSWORD
+            user: process.env.CODEIAL_SMTP_USERNAME,
+            pass: process.env.CODEIAL_SMTP_PASSWORD
         }
     },
     google_client_id: process.env.CODEIAL_GOOGLE_CLIENT_ID,

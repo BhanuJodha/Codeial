@@ -1,9 +1,10 @@
 const nodeMailer = require("../config/nodemailer");
+const env = require("../config/environment");
 
 exports.newPost = (post) => {
     nodeMailer.transporter.sendMail({
         subject: "New post on codeial",
-        from: "bhanupratap9828103466@gmail.com",
+        from: env.smtp.auth.user,
         to: post.user.email,
         html: nodeMailer.renderTemplate({post}, "/posts/new_post.ejs")
     }, (err, info) => {
@@ -17,7 +18,7 @@ exports.newPost = (post) => {
 exports.deletePost = (post) => {
     nodeMailer.transporter.sendMail({
         subject: "Delete a post from codeial",
-        from: "bhanupratap9828103466@gmail.com",
+        from: env.smtp.auth.user,
         to: post.user.email,
         html: nodeMailer.renderTemplate({post}, "/posts/delete_post.ejs")
     }, (err, info) => {
