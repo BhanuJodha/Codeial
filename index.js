@@ -56,7 +56,8 @@ app.set("views", "./views");
 // Extracting x-www-form-urlencoded form
 app.use(express.urlencoded({
     extended: false
-}))
+}));
+app.use(express.json());
 
 // setting cookie parser
 app.use(cookieParser());

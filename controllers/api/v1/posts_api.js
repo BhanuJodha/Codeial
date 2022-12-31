@@ -1,65 +1,105 @@
 const Post = require("../../../models/post");
 const Comment = require("../../../models/comment");
+const queue = require("../../../workers/post_email_worker");
 
 module.exports.index = async (req, res) => {
     try {
-        // console.log(req.headers)
-        res.status(200).json({
+        if (!req.query.page || !req.query.limit) {
+            return res.status(400).json({
+                data: null,
+                success: false,
+                message: "Limit and page required"
+            })
+        }
+
+        return res.status(200).json({
             data: {
-                post: await Post.find({})
-                .sort("-createdAt")
-                .populate("user", "-password")
-                .populate({
-                    path: "comments",
-                    options: {
-                        sort: "-createdAt"
-                    },
-                    populate: {
-                        path: "user",
-                        select: "-password"
-                    }
-                })
+                next: {
+                    page: parseInt(req.query.page) + 1,
+                    limit: parseInt(req.query.limit)
+                },
+                posts: await Post.find({}, {},
+                    {
+                        limit: req.query.limit,
+                        skip: req.query.limit * (parseInt(req.query.page) - 1),
+                        sort: "-createdAt",
+                        populate: [
+                            {
+                                path: "user",
+                                select: "name email avatar"
+                            },
+                            {
+                                path: "comments",
+                                options: {
+                                    sort: "-createdAt"
+                                },
+                                populate: [
+                                    {
+                                        path: "user",
+                                        select: "email name avatar"
+                                    },
+                                    {
+                                        path: "likes",
+                                        select: "user"
+                                    }
+                                ]
+                            },
+                            {
+                                path: "likes",
+                                select: "user"
+                            }
+                        ]
+                    })
             },
-            message: "Success on posts"
+            message: "List of posts",
+            success: true
         });
+
     } catch (err) {
         res.status(500).json({
             data: null,
-            message: "Error : Internal server error"
+            message: err.message
         });
     }
 }
 
-module.exports.deletePost = async (req, res) => {
+module.exports.createPost = async (req, res) => {
     try {
-        let post = await Post.findById(req.params.id);
-        if (!post){
-            return res.status(404).json({
+        if (!req.body.content) {
+            return res.status(400).json({
                 data: null,
-                message: "Post not found!"
-            });
+                success: false,
+                message: "Content of post required"
+            })
         }
 
-        if (post.user.toString() === req.user.id){
-            await Comment.deleteMany({post: post._id});
-            post.remove();
-            return res.status(200).json({
-                data: {
-                    post_id: post.id
-                },
-                message: "Post and associated comments deleted"
-            });
-        }
+        let post = await Post.create({
+            content: req.body.content,
+            user: req.user._id
+        }).populate({
+            path: "user",
+            select: "name email avatar"
+        })
 
-        return res.status(401).json({
-            data: null,
-            message: "Unauthorized to delete this post"
+        // For sending mail to the user   
+        let job = queue.create("newPost", post).save((err) => {
+            if (err) {
+                return console.log("Error in enqueue :", err);
+            }
+            console.log("Job enqueued", job.id);
+        })
+
+        return res.status(200).json({
+            data: {
+                post
+            },
+            message: "Post created successfully"
         });
-        
+
     } catch (err) {
-        res.status(500).json({
+        return res.status(500).json({
             data: null,
-            message: "Error : Internal server error"
+            message: err.message
         });
     }
 }

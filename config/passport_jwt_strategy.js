@@ -7,7 +7,8 @@ const env = require("./environment");
 passport.use(new JwtStrategy({
     secretOrKey: env.jwt_secret,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    passReqToCallback: true
+    passReqToCallback: true,
+    ignoreExpiration: true
 }, (req, payload, done) => {
     console.log("Authenticate",payload.name);
     User.findById(payload._id, (err, user) => {

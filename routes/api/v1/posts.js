@@ -6,6 +6,6 @@ const postsApi = require("../../../controllers/api/v1/posts_api");
 
 router.get("/", postsApi.index);
 
-router.delete("/:id", passport.authenticate("jwt", {session: false}), postsApi.deletePost);
+// router.delete("/:id", passport.authenticate("jwt", {session: false}), postsApi.deletePost);
 
 module.exports = router;
