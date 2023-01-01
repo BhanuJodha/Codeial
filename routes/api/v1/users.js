@@ -8,10 +8,10 @@ router.post("/login", userApi.login);
 
 router.post("/signup", userApi.signup);
 
-router.post("/editUser", passport.authenticate("jwt",{session: false}), userApi.editUser);
+router.post("/edit", passport.authenticate("jwt",{session: false}), userApi.editUser);
 
-router.get("/searchUser", passport.authenticate("jwt",{session: false}), userApi.searchUser);
+router.get("/search", passport.authenticate("jwt",{session: false}), userApi.searchUsers);
 
-router.get("/userInfo/:id", passport.authenticate("jwt",{session: false}), userApi.userInfo);
+router.get("/:id", passport.authenticate("jwt",{session: false}), userApi.userInfo);
 
 module.exports = router;

@@ -29,7 +29,8 @@ const devlopment = {
     morgan: {
         mode: "dev",
         options: {stream: accessLogStream}
-    }
+    },
+    clientCorsOrigin: "http://localhost:3000"
 }
 
 const production = {

@@ -58,6 +58,7 @@ module.exports.index = async (req, res) => {
     } catch (err) {
         res.status(500).json({
             data: null,
+            success: false,
             message: err.message
         });
     }
@@ -76,7 +77,8 @@ module.exports.createPost = async (req, res) => {
         let post = await Post.create({
             content: req.body.content,
             user: req.user._id
-        }).populate({
+        })
+        await post.populate({
             path: "user",
             select: "name email avatar"
         })
@@ -93,12 +95,14 @@ module.exports.createPost = async (req, res) => {
             data: {
                 post
             },
+            success: true,
             message: "Post created successfully"
         });
 
     } catch (err) {
         return res.status(500).json({
             data: null,
+            success: false,
             message: err.message
         });
     }

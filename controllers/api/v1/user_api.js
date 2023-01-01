@@ -14,19 +14,24 @@ exports.login = async (req, res) => {
         }
 
         // find and populate the object
-        let user = await User.findOne({ email: req.body.email }).populate({
-            path: "following",
-            populate: {
-                path: "to_user",
-                select: "name email avatar"
-            }
-        }).populate({
-            path: "followers",
-            populate: {
-                path: "by_user",
-                select: "name email avatar"
-            }
-        }).lean();
+        let user = await User.findOne({ email: req.body.email }, "-following -followers -chats")
+        // .populate({
+        //     path: "following",
+        //     select: "to_user",
+        //     populate: {
+        //         path: "to_user",
+        //         select: "name email avatar"
+        //     }
+        // })
+        // .populate({
+        //     path: "followers",
+        //     select: "by_user",
+        //     populate: {
+        //         path: "by_user",
+        //         select: "name email avatar"
+        //     }
+        // })
+        .lean();
 
         // password check
         if (user && user.password === req.body.password) {
@@ -104,69 +109,65 @@ exports.signup = async (req, res) => {
 
 exports.editUser = async (req, res) => {
     try {
-        if (!req.body.id || !req.body.name) {
+        if (!req.body.name) {
             return res.status(400).json({
                 data: null,
-                message: "All fields are mandatory",
+                message: "Name is mandatory",
                 success: false
             });
         }
-        
-        if (req.user.id === req.body.id) {
-            let user = await User.findById(req.body.id);
 
-            return User.uploadedAvatar(req, res, async (err) => {
-                if (err) {
-                    return console.log(err);
+        let user = req.user;
+
+        return User.uploadedAvatar(req, res, async (err) => {
+            if (err) {
+                return console.log(err);
+            }
+
+            if (req.file) {
+                // For removing old avatar
+                if (user.avatar !== "/images/profile.webp" && fs.existsSync(path.join(__dirname, "../../../", user.avatar))) {
+                    fs.unlinkSync(path.join(__dirname, "../../../", user.avatar));
                 }
+                user.avatar = User.AVATAR_PATH + req.file.filename;
+            }
 
-                if (req.file) {
-                    // For removing old avatar
-                    if (user.avatar !== "/images/profile.webp" && fs.existsSync(path.join(__dirname, "../../../", user.avatar))){
-                        fs.unlinkSync(path.join(__dirname, "../../../", user.avatar));
-                    }
-                    user.avatar = User.AVATAR_PATH + req.file.filename;
+            user.name = req.body.name;
+
+            // if password exist 
+            if (req.body.password) {
+                if (req.body.password === req.body.confirm_password) {
+                    user.password = req.body.password;
                 }
+                else {
+                    return res.status(400).json({
+                        data: {
+                            user
+                        },
+                        message: "Confirm password does not match password",
+                        success: false
+                    });
+                }
+            }
 
-                user.name = req.body.name;
+            await user.save();
+            user = await User.findById(user, "-password -following -followers -chats").lean();
 
-                // if password exist 
-                if (req.body.password) {
-                    if (req.body.password === req.body.confirm_password){
-                        user.password = req.body.password;
-                    }
-                    else {
-                        return res.status(400).json({
-                            data: null,
-                            message: "Confirm password does not match password",
-                            success: false
-                        });
-                    }
-                } 
-
-                await user.save();
-
-                return res.status(200).json({
-                    data: null,
-                    message: "Profile updated successfully",
-                    success: false
-                });
-            });
-        }
-        else {
-            return res.status(401).status({
-                data: null,
-                message: "Unauthorized",
-                success: false
-            });        
-        }
+            return res.status(200).json({
+                data: {
+                    token: jwt.sign(user, env.jwt_secret, { expiresIn: 100000 })
+                },
+                message: "Profile updated successfully",
+                success: true
+            })
+        });
 
     } catch (err) {
         return res.status(500).status({
             data: null,
             message: err.message,
             success: false
-        });    
+        });
     }
 }
 
@@ -196,7 +197,7 @@ exports.userInfo = (req, res) => {
     });
 }
 
-exports.searchUser = (req, res) => {
+exports.searchUsers = (req, res) => {
     if (req.query.text.length < 3) {
         return res.status(400).json({
             data: null,
@@ -205,7 +206,7 @@ exports.searchUser = (req, res) => {
         })
     }
 
-    User.find({name: new RegExp(req.query.text, "i")}, "name email avatar", (err, users) => {
+    User.find({ name: new RegExp(req.query.text, "i") }, "name email avatar", (err, users) => {
         if (err) {
             return res.status(500).json({
                 data: null,
@@ -213,13 +214,13 @@ exports.searchUser = (req, res) => {
                 message: err.message
             })
         }
-            return res.status(200).json({
-                data: {
-                    users
-                },
-                success: true,
-                message: "All matching users"
-            })
+        return res.status(200).json({
+            data: {
+                users
+            },
+            success: true,
+            message: "All matching users"
+        })
     })
-    
+
 }

@@ -10,7 +10,6 @@ passport.use(new JwtStrategy({
     passReqToCallback: true,
     ignoreExpiration: true
 }, (req, payload, done) => {
-    console.log("Authenticate",payload.name);
     User.findById(payload._id, (err, user) => {
         if (err){
             console.log(err);

@@ -28,7 +28,7 @@ exports.createComment = async (req, res) => {
                 console.log("Job enqueued", job.id);
             })
 
-            req.status(200).json({
+            res.status(200).json({
                 data: {
                     comment
                 },
@@ -37,7 +37,7 @@ exports.createComment = async (req, res) => {
             })
         }
         else {
-            req.status(400).json({
+            res.status(400).json({
                 data: null,
                 success: false,
                 message: "Invalid post id: " + req.body.post_id
@@ -45,7 +45,8 @@ exports.createComment = async (req, res) => {
         }
 
     } catch (err) {
-        req.status(500).json({
+        console.log(err);
+        res.status(500).json({
             data: null,
             success: false,
             message: err.message

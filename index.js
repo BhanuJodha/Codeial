@@ -11,6 +11,7 @@ const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 const path = require("path");
 const logger = require("morgan");
+const cors = require("cors");
 
 // setting socket.io files
 const socket = require("./config/socket_io")(app);
@@ -39,7 +40,7 @@ if (env.name === "Devlopment"){
 app.use(express.static(path.join(__dirname, env.asset_path)));
 
 // setting statics for profile picture
-app.use("/uploads", express.static("./uploads"));
+app.use("/uploads", cors({origin: env.clientCorsOrigin}), express.static("./uploads"));
 
 // setting logger
 app.use(logger(env.morgan.mode, env.morgan.options));
