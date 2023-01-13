@@ -64,7 +64,7 @@ module.exports.deletePost = async (req, res) => {
                 console.log("Job enqueued", job.id);
             })
 
-            post.remove();
+            await post.remove();
 
             // For AJAX Requests
             if (req.xhr) {

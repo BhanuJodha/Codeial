@@ -53,3 +53,54 @@ exports.createComment = async (req, res) => {
         })
     }
 }
+
+exports.deleteComment = async (req, res) => {
+    try {
+        let comment = await Comment.findById(req.query.comment_id).populate("post");
+
+        if (comment && (comment.user.toString() === req.user.id || comment.post.user.toString() === req.user.id)) {
+            // deleting associated likes and delinking from post
+            await Post.findByIdAndUpdate(comment.post, { $pull: { comments: comment._id } });
+            await Like.deleteMany({_id: {$in: comment.likes}});
+
+            await comment.populate({
+                path: "user",
+                select: "name email avatar"
+            })
+
+            // For sending mail to the user
+            let job = queue.create("deleteComment", comment).save((err) => {
+                if (err) {
+                    return console.log("Error in enqueue :", err);
+                }
+                console.log("Job enqueued", job.id);
+            })
+
+            await comment.delete();
+
+            return res.status(200).json({
+                data: {
+                    // comment_id: comment.id
+                    comment
+                },
+                success: true,
+                message: "Comment deleted successfully"
+            });
+        }
+        else {
+            res.status(400).json({
+                data: null,
+                success: false,
+                message: "Invalid request"
+            })
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            data: null,
+            success: false,
+            message: err.message
+        })
+    }
+}

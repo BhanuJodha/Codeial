@@ -1,6 +1,7 @@
 const Post = require("../../../models/post");
 const Comment = require("../../../models/comment");
 const queue = require("../../../workers/post_email_worker");
+const Like = require("../../../models/like");
 
 module.exports.index = async (req, res) => {
     try {
@@ -105,5 +106,55 @@ module.exports.createPost = async (req, res) => {
             success: false,
             message: err.message
         });
+    }
+}
+
+exports.deletePost = async (req, res) => {
+    try {
+        let post = await Post.findById(req.query.post_id);
+        if (post && post.user.toString() === req.user.id) {
+            // deleting associated comments and likes
+            await Comment.deleteMany({ _id: { $in: post.comments } });
+            await Like.deleteMany({ _id: { $in: post.likes } });
+            await Like.deleteMany({ onModel: "Comment", likeable: { $in: post.comments } });
+
+            await post.populate({
+                path: "user",
+                select: "name email avatar"
+            });
+
+            // For sending mail to the user
+            let job = queue.create("deletePost", post).save((err) => {
+                if (err) {
+                    return console.log("Error in enqueue :", err);
+                }
+                console.log("Job enqueued", job.id);
+            })
+
+            await post.delete();
+
+            return res.status(200).json({
+                data: {
+                    post
+                },
+                success: true,
+                message: "Post and associated comments deleted successfully"
+            });
+        }
+        else {
+            res.status(400).json({
+                data: null,
+                success: false,
+                message: "Invalid request"
+            })
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            data: null,
+            success: false,
+            message: err.message
+        })
     }
 }

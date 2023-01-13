@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post("/", passport.authenticate("jwt", {session: false}), commentApi.createComment);
 
+router.delete("/", passport.authenticate("jwt", {session: false}), commentApi.deleteComment);
+
 module.exports = router;

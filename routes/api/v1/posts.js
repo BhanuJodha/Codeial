@@ -8,6 +8,6 @@ router.get("/", postsApi.index);
 
 router.post("/create", passport.authenticate("jwt", {session: false}), postsApi.createPost);
 
-// router.delete("/:id", passport.authenticate("jwt", {session: false}), postsApi.deletePost);
+router.delete("/", passport.authenticate("jwt", {session: false}), postsApi.deletePost);
 
 module.exports = router;
