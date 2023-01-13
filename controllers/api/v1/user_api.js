@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 const User = require("../../../models/user");
 const env = require("../../../config/environment");
 
@@ -108,20 +110,24 @@ exports.signup = async (req, res) => {
 }
 
 exports.editUser = async (req, res) => {
-    try {
-        if (!req.body.name) {
-            return res.status(400).json({
-                data: null,
-                message: "Name is mandatory",
-                success: false
-            });
-        }
-
+    try {        
         let user = req.user;
-
+        
         return User.uploadedAvatar(req, res, async (err) => {
             if (err) {
-                return console.log(err);
+                return res.status(400).json({
+                    data: null,
+                    message: err.message,
+                    success: false
+                });
+            }
+            
+            if (!req.body.name) {
+                return res.status(400).json({
+                    data: null,
+                    message: "Name is mandatory",
+                    success: false
+                });
             }
 
             if (req.file) {
@@ -141,9 +147,7 @@ exports.editUser = async (req, res) => {
                 }
                 else {
                     return res.status(400).json({
-                        data: {
-                            user
-                        },
+                        data: null,
                         message: "Confirm password does not match password",
                         success: false
                     });

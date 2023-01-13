@@ -55,8 +55,16 @@ const storage = multer.diskStorage({
     }
 })
 
+const imageFileFilter = (req, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        cb(null, true);
+    } else {
+        cb(new Error('You can upload only image files'), false);
+    };
+}
+
 // Static methords
-userSchema.statics.uploadedAvatar = multer({ storage }).single("avatar");
+userSchema.statics.uploadedAvatar = multer({ storage, fileFilter: imageFileFilter }).single("avatar");
 userSchema.statics.AVATAR_PATH = AVATAR_PATH;
 
 const User = mongoose.model("User", userSchema);
