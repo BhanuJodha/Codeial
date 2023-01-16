@@ -12,4 +12,6 @@ router.use("/comments", require("./comments"));
 
 router.use("/likes", require("./likes"));
 
+router.use("/chats", require("./chats"));
+
 module.exports = router;

@@ -11,7 +11,7 @@ const devlopment = {
     name: "Devlopment",
     asset_path: "./assets",
     session_cookie_key: "Secure3D",
-    cros_origin: "http://127.0.0.1:8000",
+    cros_origin: ["http://127.0.0.1:8000", "http://localhost:3000"],
     db: "codial_devlopment",
     smtp: {
         host: "us2.smtp.mailhostbox.com",

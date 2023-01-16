@@ -16,7 +16,6 @@ passport.use(new JwtStrategy({
             return done(err, false);
         }
         if(user){
-            req.payload = payload;
             return done(null, user);
         }
         return done(new Error("User not found"), false);

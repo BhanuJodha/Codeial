@@ -50,7 +50,7 @@ exports.removeFollow = async (req, res) => {
 exports.addFollow = async (req, res) => {
     try {
         const toUser = await User.findById(req.query.user_id);
-        
+
         if (toUser && toUser.id !== req.user.id) {
             let follow = await Follow.findOne({ to_user: toUser._id, by_user: req.user._id })
 
@@ -64,7 +64,7 @@ exports.addFollow = async (req, res) => {
                 });
             }
 
-            follow = await Follow.create({to_user: toUser._id, by_user: req.user._id});
+            follow = await Follow.create({ to_user: toUser._id, by_user: req.user._id });
 
             req.user.following.push(follow._id);
             await req.user.save();
@@ -99,22 +99,77 @@ exports.addFollow = async (req, res) => {
 
 exports.following = async (req, res) => {
     try {
-            await req.user.populate({
+        await req.user.populate({
+            path: "following",
+            select: "to_user",
+            populate: {
+                path: "to_user",
+                select: "name email avatar"
+            }
+        })
+
+        return res.status(200).json({
+            data: {
+                following: req.user.following
+            },
+            success: true,
+            message: "All following of " + req.user.name
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            data: null,
+            success: false,
+            message: err.message
+        })
+    }
+}
+
+
+exports.getFriends = async (req, res) => {
+    try {
+        await req.user.populate([
+            {
                 path: "following",
                 select: "to_user",
                 populate: {
                     path: "to_user",
                     select: "name email avatar"
                 }
-            })
+            },
+            {
+                path: "followers",
+                select: "by_user",
+                populate: {
+                    path: "by_user",
+                    select: "name email avatar"
+                }
+            }
+        ])
 
-            return res.status(200).json({
-                data: {
-                    following: req.user.following
-                },
-                success: true,
-                message: "All following of "+ req.user.name
-            });
+        let following = req.user.following;
+        let followers = req.user.followers;
+
+        // Aggregating followers
+        followers = followers.filter(follower => {
+            for(let follow of following){
+                if (follower.by_user.id === follow.to_user.id){
+                    return false;
+                }
+            }
+            return true;
+        })
+
+        followers = followers.map(f => f.by_user);
+        following = following.map(f => f.to_user);
+
+        return res.status(200).json({
+            data: {
+                friends: [...following, ...followers]
+            },
+            success: true,
+            message: "All friends of " + req.user.name
+        });
 
     } catch (err) {
         res.status(500).json({
