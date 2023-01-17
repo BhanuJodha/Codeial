@@ -39,6 +39,9 @@ if (env.name === "Devlopment"){
 // setting statics
 app.use(express.static(path.join(__dirname, env.asset_path)));
 
+// setting statics for react
+app.use("/v2", express.static(path.join(__dirname, "build")));
+
 // setting statics for profile picture
 app.use("/uploads", cors({origin: env.clientCorsOrigin}), express.static("./uploads"));
 

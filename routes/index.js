@@ -10,6 +10,9 @@ const controller = require("../controllers/home_controller");
 // API routing
 router.use("/api", cors({origin: env.clientCorsOrigin, credentials: true}), require("./api/index"));
 
+// React version
+router.get("/v2/*", controller.reactFiles);
+
 // custom middelware for flash messages
 router.use(custMiddelware.flash);
 

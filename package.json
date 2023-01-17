@@ -1,6 +1,6 @@
 {
   "name": "codeial",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A social media web application",
   "main": "index.js",
   "scripts": {
@@ -44,5 +44,13 @@
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
     "sass": "^1.55.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BhanuJodha3466/Codeial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BhanuJodha3466/Codeial/issues"
+  },
+  "homepage": "https://github.com/BhanuJodha3466/Codeial#readme"
 }

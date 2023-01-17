@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/v2/static/css/main.10e0c8fd.css",
+    "main.js": "/v2/static/js/main.cf6f4044.js",
+    "static/media/Codial-new.png": "/v2/static/media/Codial-new.6fe394a531c06cf24772.png",
+    "index.html": "/v2/index.html",
+    "main.10e0c8fd.css.map": "/v2/static/css/main.10e0c8fd.css.map",
+    "main.cf6f4044.js.map": "/v2/static/js/main.cf6f4044.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.10e0c8fd.css",
+    "static/js/main.cf6f4044.js"
+  ]
+}

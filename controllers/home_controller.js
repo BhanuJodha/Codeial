@@ -1,3 +1,4 @@
+const path = require("path");
 const Post = require("../models/post");
 const User = require("../models/user");
 
@@ -43,4 +44,8 @@ module.exports.home = async (req, res) => {
         console.log("Error : ", err);
         return;
     }
+}
+
+exports.reactFiles = (req, res) => {
+    res.sendFile(path.join(__dirname, "../build/index.html"));
 }
