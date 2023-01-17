@@ -59,7 +59,8 @@ const production = {
     morgan: {
         mode: "combined",
         options: {stream: accessLogStream}
-    }
+    },
+    clientCorsOrigin: process.env.CLIENT_CORS_ORIGIN
 }
 
 module.exports = process.env.NODE_ENV === undefined ? devlopment : production;
