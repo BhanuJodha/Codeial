@@ -24,7 +24,9 @@ const devlopment = {
     },
     google_client_id: "925898070036-oc8fmd2vvcpu10j2l0nh23n3rue9rsk2.apps.googleusercontent.com",
     google_client_secret: "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",
-    google_call_back_url: "http://localhost:8000/user/oauth/google/callback",
+    google_call_back_url: "http://localhost:8000/api/v1/users/oauth/google/callback",
+    google_success_redirect: "http://localhost:3000/",
+    google_failure_redirect: "http://localhost:3000/login",
     jwt_secret: "Secure3D",
     morgan: {
         mode: "dev",
@@ -51,6 +53,8 @@ const production = {
     google_client_id: process.env.CODEIAL_GOOGLE_CLIENT_ID,
     google_client_secret: process.env.CODEIAL_GOOGLE_CLIENT_SECRET,
     google_call_back_url: process.env.CODEIAL_GOOGLE_CALL_BACK_URL,
+    google_success_redirect: process.env.GOOGLE_SUCCESS_REDIRECT,
+    google_failure_redirect: process.env.GOOGLE_FAILURE_REDIRECT,
     jwt_secret: process.env.CODEIAL_JWT_SECRET,
     morgan: {
         mode: "combined",

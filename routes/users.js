@@ -18,10 +18,6 @@ router.get("/sign-out", passport.userAuthenticated, controller.deleteSession);
 
 router.post("/create", controller.create);
 
-// Google OAuth-2 Strategy
-router.get("/oauth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-router.get("/oauth/google/callback", passport.authenticate("google", { failureRedirect: "/user/sign-in", failureFlash: "Unable to authenticate with google" }), controller.createSession);
-
 // Passport local Strategy
 router.post("/create-session", passport.authenticate("local", { failureRedirect: "/user/sign-in" }), controller.createSession);
 

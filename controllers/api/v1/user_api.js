@@ -88,7 +88,11 @@ exports.signup = async (req, res) => {
                 });
             }
             else {
-                badReqMessage = "You have already signed up, please login"
+                return res.status(400).json({
+                    data: null,
+                    message: "You have already signed up, please login",
+                    success: true
+                });
             }
         }
         else {
@@ -227,4 +231,43 @@ exports.searchUsers = (req, res) => {
         })
     })
 
+}
+
+exports.checkGoogleAuth =  async (req, res) => {
+    try {
+        console.log(req.user)
+        // user check
+        if (!req.isAuthenticated() || !req.user) {
+            return res.status(200).json({
+                data: null,
+                success: false,
+                message: "Not authenticated by google"
+            })
+        }
+
+        // filter the object
+        let user = await User.findById(req.user._id, "-following -followers -chats -password").lean();
+
+        // logout for google authentication
+        req.logout((err)=>{
+            console.error(err)
+        });
+
+        return res.status(200).json({
+            data: {
+                token: jwt.sign(user, env.jwt_secret, { expiresIn: 100000 }),
+                user
+            },
+            success: true,
+            message: "Google authentication successfull"
+        })
+        
+
+    } catch (err) {
+        return res.status(500).json({
+            data: null,
+            success: false,
+            message: err.message
+        })
+    }
 }

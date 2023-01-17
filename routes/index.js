@@ -8,7 +8,7 @@ const env = require("../config/environment");
 const controller = require("../controllers/home_controller");
 
 // API routing
-router.use("/api", cors({origin: env.clientCorsOrigin}), require("./api/index"));
+router.use("/api", cors({origin: env.clientCorsOrigin, credentials: true}), require("./api/index"));
 
 // custom middelware for flash messages
 router.use(custMiddelware.flash);
