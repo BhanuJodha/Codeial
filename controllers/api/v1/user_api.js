@@ -83,7 +83,7 @@ exports.signup = async (req, res) => {
                     data: {
                         user
                     },
-                    message: "Sign up successfull, user created",
+                    message: "Sign up successful, user created",
                     success: true
                 });
             }
@@ -259,7 +259,7 @@ exports.checkGoogleAuth =  async (req, res) => {
                 user
             },
             success: true,
-            message: "Google authentication successfull"
+            message: "Google authentication successful"
         })
         
 

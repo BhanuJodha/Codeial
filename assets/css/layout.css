@@ -80,6 +80,21 @@ body #header > header div:last-child button[data-name="sign-out"]:hover {
   color: white;
 }
 
+body #header > header div:last-child button[data-name="new-vesion"] {
+  animation: v2 .5s infinite;
+  background-color: white;
+  font-weight: 600;
+}
+
+@keyframes v2 {
+  from {
+    color: #00ff91;
+  }
+  to {
+    color: black;
+  }
+}
+
 body #body {
   flex-grow: 1;
   background-color: #f1f2f2;

@@ -80,6 +80,21 @@ body{
                             background-color: $danger;
                             color: white;
                         }
+                        
+                        &[data-name="new-vesion"]{
+                            animation: v2 .5s infinite;
+                            background-color: white;
+                            font-weight: 600;
+                            
+                            @keyframes v2 {
+                                from {
+                                    color: rgb(0, 255, 145);
+                                }
+                                to {
+                                    color: black;
+                                }
+                            }
+                        }
                     }
 
                 }  

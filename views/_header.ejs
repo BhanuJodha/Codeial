@@ -1,14 +1,19 @@
 <header>
-    <a href="/"><div>Codeial</div></a>
+    <a href="/">
+        <div>Codeial</div>
+    </a>
 
     <div>
-    <% if (locals.user){%>
-        <img src="<%=user.avatar%>">
-        <span><%=user.name%></span>
-        <a href="/user/sign-out"><button data-name="sign-out">Sign Out</button></a>
-    <%}else{%>
-        <a href="/user/sign-in"><button>Sign In</button></a>
-        <a href="/user/sign-up"><button>Sign Up</button></a>        
-    <%}%>
+        <% if (locals.user){%>
+            <img src="<%=user.avatar%>">
+            <span>
+                <%=user.name%>
+            </span>
+            <a href="/user/sign-out"><button data-name="sign-out">Sign Out</button></a>
+            <%}else{%>
+                <a href="/user/sign-in"><button>Sign In</button></a>
+                <a href="/user/sign-up"><button>Sign Up</button></a>
+                <%}%>
+                    <a href="/v2"><button data-name="new-vesion">New Version</button></a>
     </div>
 </header>
