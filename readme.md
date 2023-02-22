@@ -61,4 +61,4 @@ MAINTAINERS
 -----------
 
 Current maintainers:
- * Bhanu Pratap Singh Rathore - https://github.com/BhanuJodha3466
+ * Bhanu Pratap Singh Rathore - https://github.com/BhanuJodha
